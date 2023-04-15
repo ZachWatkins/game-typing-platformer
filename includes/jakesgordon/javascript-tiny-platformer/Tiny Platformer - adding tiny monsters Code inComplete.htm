@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="env" content="prod">
+  <meta name="deploy-date" content="2022-09-07">
+  <meta name="publish-date" content="2013-06-02">
+  <meta name="last-modified-date" content="2020-03-24">
+  <meta name="author" content="Jake Gordon">
+  <meta name="email" content="jake@codeincomplete.com">
+  <meta name="description" content="Personal Website for Jake Gordon">
+  <meta property="og:image" content="https://codeincomplete.com/images/brand.e0292570a36e5568dcf7f87a7bb5cc72443280f97a42b68acd6b3899339da569.png">
+  <meta property="og:description" content="Personal Website for Jake Gordon">
+  <meta property="og:title" content="Tiny Platformer - adding tiny monsters">
+  <title> Tiny Platformer - adding tiny monsters | Code inComplete </title>
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-21073988-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  <link rel="stylesheet" href="/css/content.min.05002063072559362e2d4a09e3559c9095b6c45a6351d8696683d8276bae3f46.css">
+  <link rel="preload" as="style" href="/css/font-awesome.min.68602f64c8baddd5839b6fd6224c7ffb59b12ad3a6d0b3c62cfc78157b96562c.css" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/font-awesome.min.68602f64c8baddd5839b6fd6224c7ffb59b12ad3a6d0b3c62cfc78157b96562c.css"></noscript>
+  <link rel="shortcut icon" href="/images/favicon.b59955c6040c5682e3402f0d72dea53f4894d24f12eb58aacabca77cec478790.ico">
+</head>
+<body>
+  <div id="frame"><div id='header'><div>
+    <a href='/'><img class='brand' src='/images/brand.e0292570a36e5568dcf7f87a7bb5cc72443280f97a42b68acd6b3899339da569.png' alt='go to home page' title='go to home page'></img></a>
+  </div>
+
+  <div class='byline'>
+    <div class='links'>
+      <a href='/' class=''>home</a> |
+      <a href='/articles/' class='selected'>articles</a> |
+      <a href='/games/' class=''>games</a> |
+      <a href='/projects/' class=''>projects</a> |
+      <a href='/about/' class=''>about</a>
+      <span class='show-sm-up'>| <a href='/about/resume.pdf'>resume</a></span>
+      <span class='contact'>
+        <a href='https://www.linkedin.com/in/jake-gordon-123968aa' class='link linkedin' title='Jake Gordon on LinkedIn'><i class='fab fa-linkedin'></i></a>
+        <a href='https://twitter.com/jakesgordon'  class='link twitter'  title='@jakesgordon on Twitter'><i class='fab fa-twitter'></i></a>
+        <a href='https://github.com/jakesgordon'   class='link github'   title='@jakesgordon on GitHub'><i class='fab fa-github'></i></a>
+        <a href='mailto:jake@codeincomplete.com'    class='link email'    title='email jake@codeincomplete.com'><i class='fal fa-envelope'></i></a>
+        <a href='https://feeds.feedburner.com/codeincomplete'      class='link rss'      title='subscribe to articles in your favorite rss reader'><i class='fad fa-rss'></i></a>
+      </span>
+    </div>
+  </div>
+
+</div>
+<div id="content" class="page article tiny-platformer-revisited"><div class='page-title'>
+    <h1>Tiny Platformer - adding tiny monsters</h1><span class='date'>Sun, Jun 2, 2013</span>
+<div id='social'>
+  <div id='twitter' class='network'>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">&nbsp;</a>
+  </div>
+  <div id='facebook' class='network'>
+    <div class="fb-like" data-href="https://codeincomplete.com/articles/tiny-platformer-revisited/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+    <div id="fb-root"></div>
+  </div>
+  <div id='google' class='network'>
+    <div class="g-plusone"></div>
+  </div>
+</div>
+
+</div><div class='pull-right'>
+<img src="/articles/tiny-platformer-revisited/thumb.png" alt="">
+</div>
+
+<p>Last week&rsquo;s <a href="/articles/tiny-platformer
+">tiny platformer article</a> was going to be a standalone article about
+a quick and dirty platform mechanic, but it&rsquo;s not much of a challenge without treasure to collect or
+monsters to avoid.</p>
+<p>So this is a quick follow up article to show how you might add very simple entities to provide both
+of these features.</p>
+<p>Starting with the code from the last article, we can:</p>
+<ul>
+<li>define entities with <a href="http://www.mapeditor.org/">Tiled</a></li>
+<li>use ajax to load level data</li>
+<li>setup monsters and treasure</li>
+<li>refactor the player <code>update()</code> to be re-usable by the monsters</li>
+<li>have monsters turn around at the edge of platforms</li>
+</ul>
+<p>You can <a href="https://github.com/jakesgordon/javascript-tiny-platformer
+">view the source code</a> or <em>&ldquo;play&rdquo;</em> the
+game below.</p>
+<br>
+
+
+
+<style>
+  #platformer   { margin: 1em auto; position: relative; width: 640px; height: 480px; background-color: black; }
+  #canvas       { display: inline-block; width: 100%; height: 100%; }
+  #instructions { font-size: smaller; font-style: italic; text-align: center; margin-bottom: 2em; }
+</style>
+
+<div id="platformer">
+  <canvas id="canvas">
+    <div class="unsupported">
+      Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
+    </div>
+  </canvas>
+</div>
+<div id="instructions">LEFT/RIGHT to move, SPACE to jump, collect gold and jump on monsters.</div>
+
+<script src="platformer.js"></script>
+
+
+<h2 id="defining-entities">Defining entities</h2>
+<p>In addition to defining our platform layout, we can now use the Tiled editor to add our entities.</p>
+<ul>
+<li>Add an &lsquo;object&rsquo; layer</li>
+<li>Draw an object for the <strong>player</strong> (starting position)</li>
+<li>Draw objects for each <strong>monster</strong></li>
+<li>Draw objects for each <strong>treasure</strong></li>
+</ul>
+<p>We can also give each monster additional properties, such as a <code>maxdx</code> speed, and a <code>left</code> or <code>right</code> direction.</p>
+<center>
+<img src="/articles/tiny-platformer-revisited/tiled.png" alt="">
+</center>
+
+<h2 id="using-ajax-to-load-leveljson">Using AJAX to load level.json</h2>
+<p>Since we&rsquo;re now using more than just the array of cells from the level editor, it makes sense to load
+the entire file output from the editor. We will export the level in JSON format and then use a small
+AJAX helper method to load it at run-time:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">onsuccess</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+  <span class="nx">request</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nx">request</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">))</span>
+      <span class="nx">onsuccess</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">request</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  <span class="nx">request</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div><p>With this helper in place, our game can be started by loading the file, and when complete, setting up the
+map and starting the first frame:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;level.json&#34;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">responseText</span><span class="p">));</span>
+  <span class="nx">frame</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div><h2 id="setup-the-map-and-entities">Setup the map and entities</h2>
+<p>Having loaded the JSON data output by our level editor, we can use it to setup the new entities in addition
+to the <code>cells</code> that contain the platform data.</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">setup</span><span class="p">(</span><span class="nx">map</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">data</span>    <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">data</span><span class="p">,</span>     <span class="c1">// the platforms
+</span><span class="c1"></span>      <span class="nx">objects</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">objects</span><span class="p">,</span>  <span class="c1">// the entities
+</span><span class="c1"></span>      <span class="nx">n</span><span class="p">,</span> <span class="nx">obj</span><span class="p">,</span> <span class="nx">entity</span><span class="p">;</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">objects</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">obj</span> <span class="o">=</span> <span class="nx">objects</span><span class="p">[</span><span class="nx">n</span><span class="p">];</span>
+    <span class="nx">entity</span> <span class="o">=</span> <span class="nx">setupEntity</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+    <span class="k">switch</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s2">&#34;player&#34;</span>   <span class="o">:</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">entity</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s2">&#34;monster&#34;</span>  <span class="o">:</span> <span class="nx">monsters</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">entity</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s2">&#34;treasure&#34;</span> <span class="o">:</span> <span class="nx">treasure</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">entity</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">cells</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">setupEntity</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">entity</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">x</span>        <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">y</span>        <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">dx</span>       <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">dy</span>       <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">gravity</span>  <span class="o">=</span> <span class="nx">METER</span> <span class="o">*</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">gravity</span> <span class="o">||</span> <span class="nx">GRAVITY</span><span class="p">);</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">maxdx</span>    <span class="o">=</span> <span class="nx">METER</span> <span class="o">*</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">maxdx</span>   <span class="o">||</span> <span class="nx">MAXDX</span><span class="p">);</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">maxdy</span>    <span class="o">=</span> <span class="nx">METER</span> <span class="o">*</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">maxdy</span>   <span class="o">||</span> <span class="nx">MAXDY</span><span class="p">);</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">impulse</span>  <span class="o">=</span> <span class="nx">METER</span> <span class="o">*</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">impulse</span> <span class="o">||</span> <span class="nx">IMPULSE</span><span class="p">);</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">accel</span>    <span class="o">=</span> <span class="nx">entity</span><span class="p">.</span><span class="nx">maxdx</span> <span class="o">/</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">accel</span>    <span class="o">||</span> <span class="nx">ACCEL</span><span class="p">);</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">friction</span> <span class="o">=</span> <span class="nx">entity</span><span class="p">.</span><span class="nx">maxdx</span> <span class="o">/</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">friction</span> <span class="o">||</span> <span class="nx">FRICTION</span><span class="p">);</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">monster</span>  <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s2">&#34;monster&#34;</span><span class="p">;</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">player</span>   <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s2">&#34;player&#34;</span><span class="p">;</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">treasure</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s2">&#34;treasure&#34;</span><span class="p">;</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">left</span>     <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+  <span class="nx">entity</span><span class="p">.</span><span class="nx">right</span>    <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">entity</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><blockquote>
+<p><em>NOTE: We can (optionally) give each object unique properties within the editor, allowing us to setup
+monster entities that have different characteristics, e.g. different directions, speeds, acceleration,
+even varying the effects of gravity on a per-entity basis.</em></p>
+</blockquote>
+<h2 id="updating-monsters">Updating Monsters</h2>
+<p>The <code>update()</code> method in the original tiny platformer was all about the player, but if we
+extract that code into a separate <code>updateEntity()</code> method then we can re-use it for the
+new monster entities as well:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">update</span><span class="p">(</span><span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">updatePlayer</span><span class="p">(</span><span class="nx">dt</span><span class="p">);</span>
+  <span class="nx">updateMonsters</span><span class="p">(</span><span class="nx">dt</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">updatePlayer</span><span class="p">(</span><span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">updateEntity</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span> <span class="nx">dt</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">updateMonsters</span><span class="p">(</span><span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">max</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">monsters</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">max</span> <span class="p">;</span> <span class="nx">n</span><span class="o">++</span><span class="p">)</span>
+    <span class="nx">updateMonster</span><span class="p">(</span><span class="nx">monsters</span><span class="p">[</span><span class="nx">n</span><span class="p">],</span> <span class="nx">dt</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">updateMonster</span><span class="p">(</span><span class="nx">monster</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">monster</span><span class="p">.</span><span class="nx">dead</span><span class="p">)</span>
+    <span class="nx">updateEntity</span><span class="p">(</span><span class="nx">monster</span><span class="p">,</span> <span class="nx">dt</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><br>
+
+<p>The only change we need to make to the extracted <code>updateEntity()</code> method is to ensure
+that the monster entities turn around when they hit either a wall or the edge of a platform:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">updateEntity</span><span class="p">(</span><span class="nx">entity</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="p">...</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">entity</span><span class="p">.</span><span class="nx">monster</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">entity</span><span class="p">.</span><span class="nx">left</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">cell</span> <span class="o">||</span> <span class="o">!</span><span class="nx">celldown</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">entity</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="nx">entity</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>      
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">entity</span><span class="p">.</span><span class="nx">right</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">cellright</span> <span class="o">||</span> <span class="o">!</span><span class="nx">celldiag</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">entity</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="nx">entity</span><span class="p">.</span><span class="nx">left</span>  <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div><br>
+
+<p>We can also extend the <code>updateMonster()</code> method to detect any collisions with the player. Notice
+how easily we can provide the ability for either the monster to kill the player, or vice versa,
+by detecting if the player is currently falling onto the monster.</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">updateMonster</span><span class="p">(</span><span class="nx">monster</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="p">...</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">overlap</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">monster</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">monster</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">monster</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">TILE</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+      <span class="nx">killMonster</span><span class="p">(</span><span class="nx">monster</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nx">killPlayer</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">killMonster</span><span class="p">(</span><span class="nx">monster</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">monster</span><span class="p">.</span><span class="nx">dead</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">killPlayer</span><span class="p">(</span><span class="nx">player</span><span class="p">)</span> <span class="p">{</span>    <span class="c1">// go back to the start
+</span><span class="c1"></span>  <span class="nx">player</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+  <span class="nx">player</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+  <span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><br>
+
+<p>Finally, we can add a new method to check for any collisions between the player and any treasure:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">checkTreasure</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">max</span><span class="p">,</span> <span class="nx">t</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">treasure</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">max</span> <span class="p">;</span> <span class="nx">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">t</span> <span class="o">=</span> <span class="nx">treasure</span><span class="p">[</span><span class="nx">n</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">t</span><span class="p">.</span><span class="nx">collected</span> <span class="o">&amp;&amp;</span> <span class="nx">overlap</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">))</span>
+      <span class="nx">t</span><span class="p">.</span><span class="nx">collected</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="rendering">Rendering</h2>
+<p>Rendering is generally the same as it was before. We continue to use plain vanilla <code>&lt;canvas&gt; fillRect()</code> calls, except
+we break our rendering method into its component parts to keep it simple, and remember to avoid rendering monsters that are
+dead or treasure that has been collected:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">render</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">renderMap</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span>
+  <span class="nx">renderTreasure</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+  <span class="nx">renderPlayer</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">dt</span><span class="p">);</span>
+  <span class="nx">renderMonsters</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">dt</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">renderMap</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">cell</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">MAP</span><span class="p">.</span><span class="nx">th</span> <span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">MAP</span><span class="p">.</span><span class="nx">tw</span> <span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">cell</span> <span class="o">=</span> <span class="nx">tcell</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">COLORS</span><span class="p">[</span><span class="nx">cell</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">x</span> <span class="o">*</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">renderPlayer</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">YELLOW</span><span class="p">;</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">*</span> <span class="nx">dt</span><span class="p">),</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">*</span> <span class="nx">dt</span><span class="p">),</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">renderMonsters</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">SLATE</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">max</span><span class="p">,</span> <span class="nx">monster</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">monsters</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">max</span> <span class="p">;</span> <span class="nx">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">monster</span> <span class="o">=</span> <span class="nx">monsters</span><span class="p">[</span><span class="nx">n</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">monster</span><span class="p">.</span><span class="nx">dead</span><span class="p">)</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">monster</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="p">(</span><span class="nx">monster</span><span class="p">.</span><span class="nx">dx</span> <span class="o">*</span> <span class="nx">dt</span><span class="p">),</span> <span class="nx">monster</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="p">(</span><span class="nx">monster</span><span class="p">.</span><span class="nx">dy</span> <span class="o">*</span> <span class="nx">dt</span><span class="p">),</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">renderTreasure</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">frame</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">GOLD</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">max</span><span class="p">,</span> <span class="nx">t</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">treasure</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">max</span> <span class="p">;</span> <span class="nx">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">t</span> <span class="o">=</span> <span class="nx">treasure</span><span class="p">[</span><span class="nx">n</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">t</span><span class="p">.</span><span class="nx">collected</span><span class="p">)</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">TILE</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>&hellip; and thats pretty much all it takes to add some enemies for the player to avoid and some
+rewards for the player to collect.</p>
+<ul>
+<li><a href="/articles/tiny-platformer
+">read the original article</a></li>
+<li><a href="/games/tiny-platformer
+">play the game</a></li>
+<li><a href="https://github.com/jakesgordon/javascript-tiny-platformer
+">view the source code</a></li>
+</ul>
+<p>Enjoy!</p>
+<ul>
+<li><a href="http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/">The guide to implementing 2D platformers</a></li>
+<li><a href="http://www.wildbunny.co.uk/blog/2011/12/11/how-to-make-a-2d-platform-game-part-1/">Wildbunny - How to make a 2d platform game</a></li>
+<li><a href="http://www.raywenderlich.com/15230/how-to-make-a-platform-game-like-super-mario-brothers-part-1">Ray Wenderlich - How to make a platform game like Super Mario</a></li>
+<li><a href="http://devmag.org.za/2011/01/18/11-tips-for-making-a-fun-platformer/">DevMag - 11 tips for making a fun platformer</a></li>
+<li><a href="http://devmag.org.za/2011/07/04/how-to-design-levels-for-a-platformer/">DevMag - How to design levels for a platformer</a></li>
+<li><a href="http://www.mapeditor.org/">Tiled - free tile map editor</a></li>
+</ul>
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https:\/\/codeincomplete.com\/articles\/tiny-platformer-revisited\/';
+      this.page.identifier = 'tiny-platformer-revisited';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https:\/\/codeincomplete.disqus.com\/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+</div><div id='footer'><div class='links'>
+    <a href='/' class=''>home</a> |
+    <a href='/articles/' class='selected'>articles</a> |
+    <a href='/games/' class=''>games</a> |
+    <a href='/projects/' class=''>projects</a> |
+    <a href='/about/' class=''>about</a>
+  </div>
+
+  <div class='copyright'>
+    &copy; 2011-2022 Jake Gordon
+  </div>
+
+</div>
+</div>
+  
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+
+</body>
+</html>

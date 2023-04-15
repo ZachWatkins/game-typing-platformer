@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="env" content="prod">
+  <meta name="deploy-date" content="2022-09-07">
+  <meta name="publish-date" content="2013-05-27">
+  <meta name="last-modified-date" content="2020-03-24">
+  <meta name="author" content="Jake Gordon">
+  <meta name="email" content="jake@codeincomplete.com">
+  <meta name="description" content="Personal Website for Jake Gordon">
+  <meta property="og:image" content="https://codeincomplete.com/images/brand.e0292570a36e5568dcf7f87a7bb5cc72443280f97a42b68acd6b3899339da569.png">
+  <meta property="og:description" content="Personal Website for Jake Gordon">
+  <meta property="og:title" content="Tiny Platformer">
+  <title> Tiny Platformer | Code inComplete </title>
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-21073988-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  <link rel="stylesheet" href="/css/content.min.05002063072559362e2d4a09e3559c9095b6c45a6351d8696683d8276bae3f46.css">
+  <link rel="preload" as="style" href="/css/font-awesome.min.68602f64c8baddd5839b6fd6224c7ffb59b12ad3a6d0b3c62cfc78157b96562c.css" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/font-awesome.min.68602f64c8baddd5839b6fd6224c7ffb59b12ad3a6d0b3c62cfc78157b96562c.css"></noscript>
+  <link rel="shortcut icon" href="/images/favicon.b59955c6040c5682e3402f0d72dea53f4894d24f12eb58aacabca77cec478790.ico">
+</head>
+<body>
+  <div id="frame"><div id='header'><div>
+    <a href='/'><img class='brand' src='/images/brand.e0292570a36e5568dcf7f87a7bb5cc72443280f97a42b68acd6b3899339da569.png' alt='go to home page' title='go to home page'></img></a>
+  </div>
+
+  <div class='byline'>
+    <div class='links'>
+      <a href='/' class=''>home</a> |
+      <a href='/articles/' class='selected'>articles</a> |
+      <a href='/games/' class=''>games</a> |
+      <a href='/projects/' class=''>projects</a> |
+      <a href='/about/' class=''>about</a>
+      <span class='show-sm-up'>| <a href='/about/resume.pdf'>resume</a></span>
+      <span class='contact'>
+        <a href='https://www.linkedin.com/in/jake-gordon-123968aa' class='link linkedin' title='Jake Gordon on LinkedIn'><i class='fab fa-linkedin'></i></a>
+        <a href='https://twitter.com/jakesgordon'  class='link twitter'  title='@jakesgordon on Twitter'><i class='fab fa-twitter'></i></a>
+        <a href='https://github.com/jakesgordon'   class='link github'   title='@jakesgordon on GitHub'><i class='fab fa-github'></i></a>
+        <a href='mailto:jake@codeincomplete.com'    class='link email'    title='email jake@codeincomplete.com'><i class='fal fa-envelope'></i></a>
+        <a href='https://feeds.feedburner.com/codeincomplete'      class='link rss'      title='subscribe to articles in your favorite rss reader'><i class='fad fa-rss'></i></a>
+      </span>
+    </div>
+  </div>
+
+</div>
+<div id="content" class="page article tiny-platformer"><div class='page-title'>
+    <h1>Tiny Platformer</h1><span class='date'>Mon, May 27, 2013</span>
+<div id='social'>
+  <div id='twitter' class='network'>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">&nbsp;</a>
+  </div>
+  <div id='facebook' class='network'>
+    <div class="fb-like" data-href="https://codeincomplete.com/articles/tiny-platformer/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+    <div id="fb-root"></div>
+  </div>
+  <div id='google' class='network'>
+    <div class="g-plusone"></div>
+  </div>
+</div>
+
+</div><div class='pull-right'>
+<img src="/articles/tiny-platformer/thumb.png" alt="">
+</div>
+
+<p>I&rsquo;ve been thinking about making a platform game recently, but I&rsquo;ve never done
+one before, so I wanted to start small, very, very small!</p>
+<p>How about starting with just a tiny rectangle player character jumping around
+on some larger rectangle platforms.</p>
+<p>No, I&rsquo;m not going to remake <a href="http://www.thomaswasalone.com/">Thomas was Alone</a> (a
+great game by the way).</p>
+<p>Instead I just want to make a quick-and-dirty simple platform mechanic just to
+get started. No complexity, no baddies, no treasure to collect, just a single
+level.</p>
+<p>You can <a href="https://github.com/jakesgordon/javascript-tiny-platformer
+">view the source code</a> or <em>&ldquo;play&rdquo;</em> the
+game below, just use the LEFT and RIGHT arrow keys to move the little yellow fellow
+around and SPACE to jump.</p>
+<style>
+  #platformer   { margin: 1em auto; position: relative; width: 640px; height: 480px; background-color: black; }
+  #canvas       { display: inline-block; width: 100%; height: 100%; }
+  #instructions { font-size: smaller; font-style: italic; text-align: center; margin-bottom: 2em; }
+</style>
+
+<div id="platformer">
+  <canvas id="canvas">
+    <div class="unsupported">
+      Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
+    </div>
+  </canvas>
+</div>
+<div id="instructions">ARROW keys to move, SPACE to jump</div>
+
+<script>
+
+  //-------------------------------------------------------------------------
+  // POLYFILLS
+  //-------------------------------------------------------------------------
+
+  if (!window.requestAnimationFrame) { // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+    window.requestAnimationFrame = window.webkitRequestAnimationFrame || 
+                                   window.mozRequestAnimationFrame    || 
+                                   window.oRequestAnimationFrame      || 
+                                   window.msRequestAnimationFrame     || 
+                                   function(callback, element) {
+                                     window.setTimeout(callback, 1000 / 60);
+                                   }
+  }
+
+  //-------------------------------------------------------------------------
+  // UTILITIES
+  //-------------------------------------------------------------------------
+
+  function timestamp() {
+    return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
+  }
+
+  function bound(x, min, max) {
+    return Math.max(min, Math.min(max, x));
+  }
+
+  //-------------------------------------------------------------------------
+  // GAME CONSTANTS AND VARIABLES
+  //-------------------------------------------------------------------------
+
+  var MAP      = { tw: 64, th: 48 },
+      TILE     = 32,
+      METER    = TILE,
+      GRAVITY  = METER * 9.8 * 6, // exagerated gravity
+      MAXDX    = METER * 20,      // max horizontal speed (20 tiles per second)
+      MAXDY    = METER * 60,      // max vertical speed (60 tiles per second)
+      ACCEL    = MAXDX * 2,       // take 1/2 second to reach maxdx     (horizontal acceleration)
+      FRICTION = MAXDX * 6,       // take 1/6 second to stop from maxdx (horizontal friction)
+      JUMP     = METER * 1500,    // (big) instantaneous jump impulse
+      COLOR    = { BLACK: '#000000', YELLOW: '#ECD078', BRICK: '#D95B43', PINK: '#C02942', PURPLE: '#542437', GREY: '#333', SLATE: '#53777A' },
+      COLORS   = [ COLOR.BLACK, COLOR.YELLOW, COLOR.BRICK, COLOR.PINK, COLOR.PURPLE, COLOR.GREY ],
+      KEY      = { SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 };
+      
+  var canvas   = document.getElementById('canvas'),
+      ctx      = canvas.getContext('2d'),
+      width    = canvas.width  = MAP.tw * TILE,
+      height   = canvas.height = MAP.th * TILE,
+      player   = { x: 320, y: 320, dx: 0, dy: 0 },
+      cells    = [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
+
+  var t2p      = function(t)     { return t*TILE;                  },
+      p2t      = function(p)     { return Math.floor(p/TILE);      },
+      cell     = function(x,y)   { return tcell(p2t(x),p2t(y));    },
+      tcell    = function(tx,ty) { return cells[tx + (ty*MAP.tw)]; };
+
+
+  //-------------------------------------------------------------------------
+  // UPDATE LOOP
+  //-------------------------------------------------------------------------
+
+  function onkey(ev, key, down) {
+    switch(key) {
+      case KEY.LEFT:  player.left  = down; return cancelEvent(ev);
+      case KEY.RIGHT: player.right = down; return cancelEvent(ev);
+      case KEY.SPACE: player.jump  = down; return cancelEvent(ev);
+    }
+  }
+
+  function cancelEvent(ev) {
+    ev.preventDefault();
+    return false;
+  }
+
+  function update(dt) {
+
+    var wasleft    = player.dx  < 0,
+        wasright   = player.dx  > 0,
+        falling    = player.falling,
+        friction   = FRICTION * (falling ? 0.5 : 1),
+        accel      = ACCEL    * (falling ? 0.5 : 1);
+
+    player.ddx = 0;
+    player.ddy = GRAVITY;
+
+    if (player.left)
+      player.ddx = player.ddx - accel;
+    else if (wasleft)
+      player.ddx = player.ddx + friction;
+
+    if (player.right)
+      player.ddx = player.ddx + accel;
+    else if (wasright)
+      player.ddx = player.ddx - friction;
+
+    if (player.jump && !player.jumping && !falling) {
+      player.ddy = player.ddy - JUMP; // an instant big force impulse
+      player.jumping = true;
+    }
+
+    player.y  = Math.floor(player.y  + (dt * player.dy));
+    player.x  = Math.floor(player.x  + (dt * player.dx));
+    player.dx = bound(player.dx + (dt * player.ddx), -MAXDX, MAXDX);
+    player.dy = bound(player.dy + (dt * player.ddy), -MAXDY, MAXDY);
+
+    if ((wasleft  && (player.dx > 0)) ||
+        (wasright && (player.dx < 0))) {
+      player.dx = 0; // clamp at zero to prevent friction from making us jiggle side to side
+    }
+
+    var tx        = p2t(player.x),
+        ty        = p2t(player.y),
+        nx        = player.x%TILE,
+        ny        = player.y%TILE,
+        cell      = tcell(tx,     ty),
+        cellright = tcell(tx + 1, ty),
+        celldown  = tcell(tx,     ty + 1),
+        celldiag  = tcell(tx + 1, ty + 1);
+
+    if (player.dy > 0) {
+      if ((celldown && !cell) ||
+          (celldiag && !cellright && nx)) {
+        player.y = t2p(ty);
+        player.dy = 0;
+        player.falling = false;
+        player.jumping = false;
+        ny = 0;
+      }
+    }
+    else if (player.dy < 0) {
+      if ((cell      && !celldown) ||
+          (cellright && !celldiag && nx)) {
+        player.y = t2p(ty + 1);
+        player.dy = 0;
+        cell      = celldown;
+        cellright = celldiag;
+        ny        = 0;
+      }
+    }
+
+    if (player.dx > 0) {
+      if ((cellright && !cell) ||
+          (celldiag  && !celldown && ny)) {
+        player.x = t2p(tx);
+        player.dx = 0;
+      }
+    }
+    else if (player.dx < 0) {
+      if ((cell     && !cellright) ||
+          (celldown && !celldiag && ny)) {
+        player.x = t2p(tx + 1);
+        player.dx = 0;
+      }
+    }
+
+    player.falling = ! (celldown || (nx && celldiag));
+
+  }
+
+  //-------------------------------------------------------------------------
+  // RENDERING
+  //-------------------------------------------------------------------------
+
+  function render(ctx, dt) {
+
+    // render map
+    var x, y;
+    for(y = 0 ; y < MAP.th ; y++) {
+      for(x = 0 ; x < MAP.tw ; x++) {
+        ctx.fillStyle = COLORS[tcell(x,y)];
+        ctx.fillRect(x * TILE, y * TILE, TILE, TILE);
+      }
+    }
+
+    // render player
+    ctx.fillStyle = COLOR.YELLOW;
+    ctx.fillRect(player.x + (player.dx * dt), player.y + (player.dy * dt), TILE, TILE);
+  }
+
+  //-------------------------------------------------------------------------
+  // THE GAME LOOP
+  //-------------------------------------------------------------------------
+
+  var fps  = 60,
+      step = 1/fps,
+      dt   = 0,
+      now, last = timestamp();
+
+  function frame() {
+    now = timestamp();
+    dt = dt + Math.min(1, (now - last) / 1000);
+    while(dt > step) {
+      dt = dt - step;
+      update(step);
+    }
+    render(ctx, dt);
+    last = now;
+    requestAnimationFrame(frame, canvas);
+  }
+
+  document.addEventListener('keydown', function(ev) { return onkey(ev, ev.keyCode, true);  }, false);
+  document.addEventListener('keyup',   function(ev) { return onkey(ev, ev.keyCode, false); }, false);
+
+  frame();
+
+  //-------------------------------------------------------------------------
+
+</script>
+ 
+
+<h2 id="i-told-you-it-would-be-small">I told you it would be small</h2>
+<p>Finally, a weekend project that actually took less than one weekend!</p>
+<p>I hope to build on top of this with a more robust platform game over the summer, but for now, let&rsquo;s look
+at what it takes to get this minimal mechanic implemented:</p>
+<ul>
+<li><strong>level data</strong> - provided by the open source <a href="http://www.mapeditor.org/">Tiled</a> map editor</li>
+<li><strong>variables</strong>  - that define our game</li>
+<li><strong>game loop</strong>  - a minimal fixed timestep game loop</li>
+<li><strong>updating</strong>   - the game world</li>
+<li><strong>rendering</strong>  - onto a HTML5 <code>&lt;canvas&gt;</code> element</li>
+</ul>
+<br>
+
+<blockquote>
+<p><em><strong>A note on code structure:</strong> Remembering that this is just an example of a simple mechanic, and
+not production ready code, we don&rsquo;t need to over-engineer any kind of complicated OO class
+design. In fact, to keep this simple I use global variables and methods (oh the horror!)</em></p>
+</blockquote>
+<h2 id="constants-and-variables">Constants and Variables</h2>
+<p>Start with a number of (tunable) constants to define our <em>world</em>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">MAP</span>      <span class="o">=</span> <span class="p">{</span> <span class="nx">tw</span><span class="o">:</span> <span class="mi">64</span><span class="p">,</span> <span class="nx">th</span><span class="o">:</span> <span class="mi">48</span> <span class="p">},</span> <span class="c1">// the size of the map (in tiles)
+</span><span class="c1"></span>    <span class="nx">TILE</span>     <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>                 <span class="c1">// the size of each tile (in game pixels)
+</span><span class="c1"></span>    <span class="nx">METER</span>    <span class="o">=</span> <span class="nx">TILE</span><span class="p">,</span>               <span class="c1">// abitrary choice for 1m
+</span><span class="c1"></span>    <span class="nx">GRAVITY</span>  <span class="o">=</span> <span class="nx">METER</span> <span class="o">*</span> <span class="mf">9.8</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span>    <span class="c1">// very exagerated gravity (6x)
+</span><span class="c1"></span>    <span class="nx">MAXDX</span>    <span class="o">=</span> <span class="nx">METER</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span>         <span class="c1">// max horizontal speed (20 tiles per second)
+</span><span class="c1"></span>    <span class="nx">MAXDY</span>    <span class="o">=</span> <span class="nx">METER</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span>         <span class="c1">// max vertical speed   (60 tiles per second)
+</span><span class="c1"></span>    <span class="nx">ACCEL</span>    <span class="o">=</span> <span class="nx">MAXDX</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>          <span class="c1">// horizontal acceleration -  take 1/2 second to reach maxdx
+</span><span class="c1"></span>    <span class="nx">FRICTION</span> <span class="o">=</span> <span class="nx">MAXDX</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span>          <span class="c1">// horizontal friction     -  take 1/6 second to stop from maxdx
+</span><span class="c1"></span>    <span class="nx">JUMP</span>     <span class="o">=</span> <span class="nx">METER</span> <span class="o">*</span> <span class="mi">1500</span><span class="p">;</span>       <span class="c1">// (a large) instantaneous jump impulse
+</span></code></pre></div><p>In addition, we have our game canvas, its context, and our player object:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">canvas</span>   <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">),</span>
+    <span class="nx">ctx</span>      <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">),</span>
+    <span class="nx">width</span>    <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span>  <span class="o">=</span> <span class="nx">MAP</span><span class="p">.</span><span class="nx">tw</span> <span class="o">*</span> <span class="nx">TILE</span><span class="p">,</span>
+    <span class="nx">height</span>   <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">MAP</span><span class="p">.</span><span class="nx">th</span> <span class="o">*</span> <span class="nx">TILE</span><span class="p">,</span>
+    <span class="nx">player</span>   <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">320</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">320</span><span class="p">,</span> <span class="nx">dx</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">dy</span><span class="o">:</span> <span class="mi">0</span> <span class="p">};</span>
+</code></pre></div><p>And a couple of utility methods for converting between <strong>tile</strong> and <strong>pixel</strong> coordinates:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">t2p</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">t</span><span class="o">*</span><span class="nx">TILE</span><span class="p">;</span>             <span class="p">},</span>
+    <span class="nx">p2t</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">p</span><span class="o">/</span><span class="nx">TILE</span><span class="p">);</span> <span class="p">},</span>
+</code></pre></div><div class='pull-right'>
+<img src="/articles/tiny-platformer/tiles.png" alt="">
+</div>
+
+<h2 id="level-data">Level Data</h2>
+<p>We start with a simple <code>COLOR</code> palette, and an array of <code>COLORS</code> to
+represent each tile type:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">COLOR</span>  <span class="o">=</span> <span class="p">{</span> <span class="nx">BLACK</span><span class="o">:</span> <span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="nx">YELLOW</span><span class="o">:</span> <span class="s1">&#39;#ECD078&#39;</span><span class="p">,</span> <span class="nx">BRICK</span><span class="o">:</span> <span class="s1">&#39;#D95B43&#39;</span><span class="p">,</span> <span class="nx">PINK</span><span class="o">:</span> <span class="s1">&#39;#C02942&#39;</span><span class="p">,</span> <span class="nx">PURPLE</span><span class="o">:</span> <span class="s1">&#39;#542437&#39;</span><span class="p">,</span> <span class="nx">GREY</span><span class="o">:</span> <span class="s1">&#39;#333&#39;</span><span class="p">,</span> <span class="nx">SLATE</span><span class="o">:</span> <span class="s1">&#39;#53777A&#39;</span> <span class="p">},</span>
+    <span class="nx">COLORS</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">BLACK</span><span class="p">,</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">YELLOW</span><span class="p">,</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">BRICK</span><span class="p">,</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">PINK</span><span class="p">,</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">PURPLE</span><span class="p">,</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">GREY</span> <span class="p">];</span>
+</code></pre></div><br>
+
+<p>We can then use the open source <a href="http://www.mapeditor.org/">Tiled</a> map editor to create
+the level layout:</p>
+<center>
+<img src="/articles/tiny-platformer/tiled.png" alt="">
+</center>
+
+<p>The editor creates an xml <a href="http://gamedev.tutsplus.com/tutorials/implementation/parsing-tiled-tmx-format-maps-in-your-own-game-engine/">.TMX</a>
+output file that defines the level, but I&rsquo;m not going to be taking advantage of any advanced features, so instead I can simply
+export it as JSON, manually pull out the <code>data</code> for the layer, and paste it directly into my source code as a simple array of
+<code>cells</code>, along with a couple of simple accessor methods:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">cells</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">...</span> <span class="p">],</span>
+    <span class="nx">cell</span>  <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span>   <span class="p">{</span> <span class="k">return</span> <span class="nx">tcell</span><span class="p">(</span><span class="nx">p2t</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span><span class="nx">p2t</span><span class="p">(</span><span class="nx">y</span><span class="p">));</span>    <span class="p">},</span>
+    <span class="nx">tcell</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tx</span><span class="p">,</span><span class="nx">ty</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">tx</span> <span class="o">+</span> <span class="p">(</span><span class="nx">ty</span><span class="o">*</span><span class="nx">MAP</span><span class="p">.</span><span class="nx">tw</span><span class="p">)];</span> <span class="p">};</span>
+</code></pre></div><p>If I add multiple levels at a later date then I could easily load the exported .json files
+using an <a href="http://en.wikipedia.org/wiki/XMLHttpRequest">ajax</a> call at the start of each level
+and a quick call to <code>JSON.parse()</code> in order to extract the <code>cells</code>, but I don&rsquo;t need that
+for this demo.</p>
+<h2 id="game-loop">Game Loop</h2>
+<p>As usual, we will be using <a href="http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/">requestAnimationFrame</a>
+to ensure our rendering loop is as smooth as possible with a controlled, <a href="http://gafferongames.com/game-physics/fix-your-timestep/">fixed timestep</a>
+update loop that is independent of our rendering loop. I explored this previously when
+implementing <a href="/articles/javascript-boulderdash
+">BoulderDash</a>.</p>
+<p>We will need a way to measure the current time. In modern browsers we can use the
+high resolution javascript timer, with a fall-back for older browsers:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">timestamp</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">performance</span> <span class="o">&amp;&amp;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">window</span><span class="p">.</span><span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div><p>The render loop runs as often as the browser allows, while the update loop is fixed
+by accumulating time until we reach the <code>step</code> required to trigger an <code>update()</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fps</span>  <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="nx">step</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="nx">fps</span><span class="p">,</span>
+    <span class="nx">dt</span>   <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">now</span><span class="p">,</span> <span class="nx">last</span> <span class="o">=</span> <span class="nx">timestamp</span><span class="p">();</span>
+
+<span class="kd">function</span> <span class="nx">frame</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">now</span> <span class="o">=</span> <span class="nx">timestamp</span><span class="p">();</span>
+  <span class="nx">dt</span> <span class="o">=</span> <span class="nx">dt</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="nx">last</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="k">while</span><span class="p">(</span><span class="nx">dt</span> <span class="o">&gt;</span> <span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dt</span> <span class="o">=</span> <span class="nx">dt</span> <span class="o">-</span> <span class="nx">step</span><span class="p">;</span>
+    <span class="nx">update</span><span class="p">(</span><span class="nx">step</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">render</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">dt</span><span class="p">);</span>
+  <span class="nx">last</span> <span class="o">=</span> <span class="nx">now</span><span class="p">;</span>
+  <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">,</span> <span class="nx">canvas</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">frame</span><span class="p">();</span> <span class="c1">// start the first frame
+</span></code></pre></div><blockquote>
+<p><em>NOTE: Since requestAnimationFrame will go idle when the browser is not visible, it is possible for
+dt to be very large, therefore we limit the actual dt to automatically &lsquo;pause&rsquo; the loop when this
+happens</em></p>
+</blockquote>
+<p>Interesting to note is that when we do have a large <code>dt</code> we make sure to run <code>update()</code> in a while loop to
+ensure the game &lsquo;catches up&rsquo; without missing any updates, but we don&rsquo;t bother doing this for <code>render()</code>
+where simply rendering the most recent state once is enough to catch up.</p>
+<h2 id="keyboard-input">Keyboard Input</h2>
+<p>In addition to the running game loop, we need to gather input from the user.
+We simply record if the player is trying to move left, right, or jump. The
+<code>update()</code> loop takes care of actually moving the player.</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">onkey</span><span class="p">(</span><span class="nx">ev</span><span class="p">,</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>  <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keyup&#39;</span><span class="p">,</span>   <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">onkey</span><span class="p">(</span><span class="nx">ev</span><span class="p">,</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span> <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">onkey</span><span class="p">(</span><span class="nx">ev</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">down</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">KEY</span><span class="p">.</span><span class="nx">LEFT</span><span class="o">:</span>  <span class="nx">player</span><span class="p">.</span><span class="nx">left</span>  <span class="o">=</span> <span class="nx">down</span><span class="p">;</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">KEY</span><span class="p">.</span><span class="nx">RIGHT</span><span class="o">:</span> <span class="nx">player</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">down</span><span class="p">;</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">KEY</span><span class="p">.</span><span class="nx">SPACE</span><span class="o">:</span> <span class="nx">player</span><span class="p">.</span><span class="nx">jump</span>  <span class="o">=</span> <span class="nx">down</span><span class="p">;</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="updating">Updating</h2>
+<p>The <code>update()</code> loop is where the magic happens!</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">update</span><span class="p">(</span><span class="nx">dt</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// magic happens
+</span><span class="c1"></span>
+<span class="p">}</span>
+</code></pre></div><p>Told you!</p>
+<br>
+
+<p>The only entity that needs updating is the player:</p>
+<ul>
+<li>calculate the forces that apply to the player</li>
+<li>apply the forces to move and accelerate the player</li>
+<li>collision detection (and resolution)</li>
+</ul>
+<br>
+
+<p>Starting with some local variables:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">wasleft</span>  <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">wasright</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">falling</span>  <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">falling</span><span class="p">;</span>
+</code></pre></div><br>
+
+<p>We can accumulate the horizontal and vertical forces that currently apply:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">ddy</span> <span class="o">=</span> <span class="nx">GRAVITY</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span>
+  <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">-</span> <span class="nx">ACCEL</span><span class="p">;</span>     <span class="c1">// player wants to go left
+</span><span class="c1"></span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">wasleft</span><span class="p">)</span>
+  <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">+</span> <span class="nx">FRICTION</span><span class="p">;</span>  <span class="c1">// player was going left, but not any more
+</span><span class="c1"></span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span>
+  <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">+</span> <span class="nx">ACCEL</span><span class="p">;</span>     <span class="c1">// player wants to go right
+</span><span class="c1"></span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">wasright</span><span class="p">)</span>
+  <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span> <span class="o">-</span> <span class="nx">FRICTION</span><span class="p">;</span>  <span class="c1">// player was going right, but not any more
+</span><span class="c1"></span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">jump</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">player</span><span class="p">.</span><span class="nx">jumping</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">falling</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">player</span><span class="p">.</span><span class="nx">ddy</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">ddy</span> <span class="o">-</span> <span class="nx">JUMP</span><span class="p">;</span>     <span class="c1">// apply an instantaneous (large) vertical impulse
+</span><span class="c1"></span>  <span class="nx">player</span><span class="p">.</span><span class="nx">jumping</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><br>
+
+<p>And integrate the forces to calculate the new position <code>(x,y)</code> and velocity <code>(dx,dy)</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">player</span><span class="p">.</span><span class="nx">y</span>  <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">y</span>  <span class="o">+</span> <span class="p">(</span><span class="nx">dt</span> <span class="o">*</span> <span class="nx">player</span><span class="p">.</span><span class="nx">dy</span><span class="p">));</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">x</span>  <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span>  <span class="o">+</span> <span class="p">(</span><span class="nx">dt</span> <span class="o">*</span> <span class="nx">player</span><span class="p">.</span><span class="nx">dx</span><span class="p">));</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">=</span> <span class="nx">bound</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">+</span> <span class="p">(</span><span class="nx">dt</span> <span class="o">*</span> <span class="nx">player</span><span class="p">.</span><span class="nx">ddx</span><span class="p">),</span> <span class="o">-</span><span class="nx">MAXDX</span><span class="p">,</span> <span class="nx">MAXDX</span><span class="p">);</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">=</span> <span class="nx">bound</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">+</span> <span class="p">(</span><span class="nx">dt</span> <span class="o">*</span> <span class="nx">player</span><span class="p">.</span><span class="nx">ddy</span><span class="p">),</span> <span class="o">-</span><span class="nx">MAXDY</span><span class="p">,</span> <span class="nx">MAXDY</span><span class="p">);</span>
+</code></pre></div><br>
+
+<p>One tricky aspect of using a frictional force to slow the player down (as opposed to just
+allowing a dead-stop) is that the force is highly unlikely to be <em>exactly</em> the force needed
+to come to a halt. In fact, its likely to overshoot in the opposite direction and lead
+to a tiny jiggling effect instead of actually stopping the player.</p>
+<p>In order to avoid this, we must clamp the horizontal velocity to zero if we detect that
+the players direction has just changed:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">((</span><span class="nx">wasleft</span>  <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span> <span class="o">||</span>
+    <span class="p">(</span><span class="nx">wasright</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)))</span> <span class="p">{</span>
+  <span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// clamp at zero to prevent friction from making us jiggle side to side
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><h2 id="collision-detection">Collision Detection</h2>
+<p>Our collision detection logic is greatly simplified by the fact that the player
+is a rectangle and is exactly the same size as a single tile. So we know that
+the player can only ever occupy 1, 2 or 4 cells:</p>
+<center>
+<img src="/articles/tiny-platformer/occupied.png" alt="">
+</center>
+
+<p>This means we can short-circuit and avoid building a general purpose collision
+detection engine (e.g. a quad tree) by simply looking at the 1 to 4 cells that
+the player occupies:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">tx</span>        <span class="o">=</span> <span class="nx">p2t</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">),</span>
+    <span class="nx">ty</span>        <span class="o">=</span> <span class="nx">p2t</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">),</span>
+    <span class="nx">nx</span>        <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="o">%</span><span class="nx">TILE</span><span class="p">,</span>         <span class="c1">// true if player overlaps right
+</span><span class="c1"></span>    <span class="nx">ny</span>        <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="o">%</span><span class="nx">TILE</span><span class="p">,</span>         <span class="c1">// true if player overlaps below
+</span><span class="c1"></span>    <span class="nx">cell</span>      <span class="o">=</span> <span class="nx">tcell</span><span class="p">(</span><span class="nx">tx</span><span class="p">,</span>     <span class="nx">ty</span><span class="p">),</span>
+    <span class="nx">cellright</span> <span class="o">=</span> <span class="nx">tcell</span><span class="p">(</span><span class="nx">tx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">ty</span><span class="p">),</span>
+    <span class="nx">celldown</span>  <span class="o">=</span> <span class="nx">tcell</span><span class="p">(</span><span class="nx">tx</span><span class="p">,</span>     <span class="nx">ty</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="nx">celldiag</span>  <span class="o">=</span> <span class="nx">tcell</span><span class="p">(</span><span class="nx">tx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">ty</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</code></pre></div><br>
+
+<p>If the player has vertical velocity, then check to see if they have hit a
+platform below or above, in which case, stop their vertical velocity, and
+clamp their <code>y</code> position:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nx">celldown</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">cell</span><span class="p">)</span> <span class="o">||</span>
+      <span class="p">(</span><span class="nx">celldiag</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">cellright</span> <span class="o">&amp;&amp;</span> <span class="nx">nx</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">t2p</span><span class="p">(</span><span class="nx">ty</span><span class="p">);</span>       <span class="c1">// clamp the y position to avoid falling into platform below
+</span><span class="c1"></span>    <span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>            <span class="c1">// stop downward velocity
+</span><span class="c1"></span>    <span class="nx">player</span><span class="p">.</span><span class="nx">falling</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>   <span class="c1">// no longer falling
+</span><span class="c1"></span>    <span class="nx">player</span><span class="p">.</span><span class="nx">jumping</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>   <span class="c1">// (or jumping)
+</span><span class="c1"></span>    <span class="nx">ny</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                   <span class="c1">// - no longer overlaps the cells below
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nx">cell</span>      <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">celldown</span><span class="p">)</span> <span class="o">||</span>
+      <span class="p">(</span><span class="nx">cellright</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">celldiag</span> <span class="o">&amp;&amp;</span> <span class="nx">nx</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">t2p</span><span class="p">(</span><span class="nx">ty</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>   <span class="c1">// clamp the y position to avoid jumping into platform above
+</span><span class="c1"></span>    <span class="nx">player</span><span class="p">.</span><span class="nx">dy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>            <span class="c1">// stop upward velocity
+</span><span class="c1"></span>    <span class="nx">cell</span>      <span class="o">=</span> <span class="nx">celldown</span><span class="p">;</span>     <span class="c1">// player is no longer really in that cell, we clamped them to the cell below 
+</span><span class="c1"></span>    <span class="nx">cellright</span> <span class="o">=</span> <span class="nx">celldiag</span><span class="p">;</span>     <span class="c1">// (ditto)
+</span><span class="c1"></span>    <span class="nx">ny</span>        <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>            <span class="c1">// player no longer overlaps the cells below
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><br>
+
+<p>Once the vertical velocity is taken care of, we can apply similar logic to
+the horizontal velocity:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nx">cellright</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">cell</span><span class="p">)</span> <span class="o">||</span>
+      <span class="p">(</span><span class="nx">celldiag</span>  <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">celldown</span> <span class="o">&amp;&amp;</span> <span class="nx">ny</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">t2p</span><span class="p">(</span><span class="nx">tx</span><span class="p">);</span>       <span class="c1">// clamp the x position to avoid moving into the platform we just hit
+</span><span class="c1"></span>    <span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>            <span class="c1">// stop horizontal velocity
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nx">cell</span>     <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">cellright</span><span class="p">)</span> <span class="o">||</span>
+      <span class="p">(</span><span class="nx">celldown</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">celldiag</span> <span class="o">&amp;&amp;</span> <span class="nx">ny</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">t2p</span><span class="p">(</span><span class="nx">tx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">// clamp the x position to avoid moving into the platform we just hit
+</span><span class="c1"></span>    <span class="nx">player</span><span class="p">.</span><span class="nx">dx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// stop horizontal velocity
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><br>
+
+<p>The last calculation for our <code>update()</code> method is to detect if the player is now
+<code>falling</code> or not. We can do that by looking to see if there is a platform
+below them:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="nx">player</span><span class="p">.</span><span class="nx">falling</span> <span class="o">=</span> <span class="o">!</span> <span class="p">(</span><span class="nx">celldown</span> <span class="o">||</span> <span class="p">(</span><span class="nx">nx</span> <span class="o">&amp;&amp;</span> <span class="nx">celldiag</span><span class="p">));</span>
+</code></pre></div><p>And thats the <code>update()</code> loop complete, running this at 60fps gives us our
+simple platform game mechanic.</p>
+<h2 id="rendering">Rendering</h2>
+<p>Finally, rendering our map is trivial. We use the standard <code>&lt;canvas&gt; fillRect()</code> method to draw
+rectangles for each tile and one more for the player:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">render</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// render map
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">MAP</span><span class="p">.</span><span class="nx">th</span> <span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">MAP</span><span class="p">.</span><span class="nx">tw</span> <span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">COLORS</span><span class="p">[</span><span class="nx">tcell</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)];</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">x</span> <span class="o">*</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// render player
+</span><span class="c1"></span>  <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">COLOR</span><span class="p">.</span><span class="nx">YELLOW</span><span class="p">;</span>
+  <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">,</span> <span class="nx">TILE</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>Since the map is static, we could have easily cached a rendered version in an off-screen canvas, but
+for something this simple performance is not an issue, so we can just re-render it every
+frame and keep the code clear and simple.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>That is a very, very, minimal platform <em>game</em>, but it gets me started! and leaves so much more to add later:</p>
+<ul>
+<li><strong>exits</strong> - to proceed to further levels</li>
+<li><strong>treasure</strong> - collect stars or coins for points</li>
+<li><strong>monsters</strong> - kill the player (or lose a life) - maybe squashable, mario-style ?</li>
+<li><strong>ladders</strong> - to climb</li>
+<li><strong>stairs &amp; slopes</strong>  - to walk up</li>
+<li><strong>moving platforms</strong> - for carefully timed jumps</li>
+<li><strong>higher jumps</strong> - the longer you hold down the SPACE key</li>
+<li><strong>double jump</strong> - for extra height</li>
+<li><strong>wall jump</strong> - meatboy style</li>
+<li><strong>swinging ropes</strong> - pitfall-tastic</li>
+<li><strong>tile sprites</strong> - more interesting platform tile graphics</li>
+<li><strong>partial tile collision</strong> - more flexible collision detection</li>
+<li><strong>character sprites</strong> - play as more than just a rectangle</li>
+<li><strong>monster sprites</strong> - jump on interesting creatures</li>
+<li><strong>traps</strong> - disintegrating platforms, collapsing columns, etc</li>
+<li><strong>switches</strong> - and secret doors</li>
+<li><em>etc</em></li>
+<li><em>etc</em></li>
+<li><em>etc</em></li>
+</ul>
+<p>Maybe, one day I&rsquo;ll add some of those things, but until then&hellip;</p>
+<ul>
+<li><a href="/articles/tiny-platformer-revisited
+">read more about adding monsters and treasure</a></li>
+<li><a href="/games/tiny-platformer
+">play the game</a></li>
+<li><a href="https://github.com/jakesgordon/javascript-tiny-platformer
+">view the source code</a></li>
+</ul>
+<p>Enjoy!</p>
+<ul>
+<li><a href="http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/">The guide to implementing 2D platformers</a></li>
+<li><a href="http://www.wildbunny.co.uk/blog/2011/12/11/how-to-make-a-2d-platform-game-part-1/">Wildbunny - How to make a 2d platform game</a></li>
+<li><a href="http://www.raywenderlich.com/15230/how-to-make-a-platform-game-like-super-mario-brothers-part-1">Ray Wenderlich - How to make a platform game like Super Mario</a></li>
+<li><a href="http://devmag.org.za/2011/01/18/11-tips-for-making-a-fun-platformer/">DevMag - 11 tips for making a fun platformer</a></li>
+<li><a href="http://devmag.org.za/2011/07/04/how-to-design-levels-for-a-platformer/">DevMag - How to design levels for a platformer</a></li>
+<li><a href="http://www.mapeditor.org/">Tiled - free tile map editor</a></li>
+</ul>
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https:\/\/codeincomplete.com\/articles\/tiny-platformer\/';
+      this.page.identifier = 'tiny-platformer';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https:\/\/codeincomplete.disqus.com\/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+</div><div id='footer'><div class='links'>
+    <a href='/' class=''>home</a> |
+    <a href='/articles/' class='selected'>articles</a> |
+    <a href='/games/' class=''>games</a> |
+    <a href='/projects/' class=''>projects</a> |
+    <a href='/about/' class=''>about</a>
+  </div>
+
+  <div class='copyright'>
+    &copy; 2011-2022 Jake Gordon
+  </div>
+
+</div>
+</div>
+  
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+
+</body>
+</html>
