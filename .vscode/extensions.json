@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "antfu.browse-lite",
+    "antfu.vite",
+    "dbaeumer.vscode-eslint",
+    "wesbos.theme-cobalt2",
+    "EditorConfig.EditorConfig",
+  ]
+}
