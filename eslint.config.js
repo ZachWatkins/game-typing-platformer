@@ -12,14 +12,13 @@ const globals = require('globals')
 const js = require('@eslint/js')
 const jsonc = require('eslint-plugin-jsonc')
 const jsdoc = require('eslint-plugin-jsdoc')
-const ignored = ['node_modules/', 'dist/', 'build/', 'public/', 'includes/']
+const ignores = ['node_modules/', 'dist/', 'build/', 'public/', 'includes/']
 
 const MyConfig = {
-    files: ['**/*.{js,mjs,cjs}', '*.js'],
+    files: ['**/*.{js,ts}', '*.{js,ts}'],
     ignores,
     plugins: {
         jsdoc,
-        jsonc,
     },
     languageOptions: {
         parserOptions: {
@@ -37,7 +36,6 @@ const MyConfig = {
     rules: {
         ...js.configs.recommended.rules,
         ...jsdoc.configs.recommended.rules,
-        ...jsonc.configs['recommended-with-jsonc'].rules,
         indent: ['error', 4],
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
@@ -55,8 +53,16 @@ const MyTestConfig = {
     },
 }
 
+const MyJsonConfig = {
+    files: ['**/*.json', '*.json'],
+    ignores,
+    plugins: { jsonc },
+    rules: jsonc.configs['recommended-with-jsonc'].rules,
+}
+
 module.exports = defineFlatConfig([
-    {ignores},
+    { ignores },
     MyConfig,
     MyTestConfig,
+    MyJsonConfig,
 ])
