@@ -18,20 +18,20 @@ const MyConfig = {
     files: ['**/*.js', '*.js'],
     ignores,
     plugins: {
-        jsdoc
+        jsdoc,
     },
     languageOptions: {
         parserOptions: {
             sourceType: 'module',
-            ecmaVersion: 2018
+            ecmaVersion: 2018,
         },
         globals: {
             ...globals.serviceworker,
             ...globals.browser,
             ...globals.node,
             ...globals.es2018,
-            ...globals.commonjs
-        }
+            ...globals.commonjs,
+        },
     },
     rules: {
         ...js.configs.recommended.rules,
@@ -39,15 +39,16 @@ const MyConfig = {
         indent: ['error', 4],
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
-        'prefer-const': 'error'
-    }
+        'prefer-const': 'error',
+        'comma-dangle': ['error', 'always-multiline'],
+    },
 }
 
 const MyJsonConfig = {
     files: ['**/*.json', '*.json'],
     ignores,
     plugins: { jsonc },
-    rules: jsonc.configs['recommended-with-jsonc'].rules
+    rules: jsonc.configs['recommended-with-jsonc'].rules,
 }
 
-module.exports = defineFlatConfig([{ ignores }, MyJsonConfig, MyConfig])
+module.exports = defineFlatConfig([{ ignores }, MyJsonConfig, MyTsConfig, MyConfig])

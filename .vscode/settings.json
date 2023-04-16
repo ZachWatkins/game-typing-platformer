@@ -11,7 +11,10 @@
     "eslint.enable": true,
     "eslint.format.enable": true,
     "eslint.lintTask.enable": true,
-    "eslint.validate": ["javascript", "typescript", "json", "markdown"],
+    "eslint.validate": ["javascript", "json", "markdown"],
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
     "eslint.run": "onSave",
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
 }
