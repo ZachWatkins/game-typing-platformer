@@ -1,9 +1,10 @@
 {
   "name": "game-typing-platformer",
+  "description": "A 2D platformer game where you type words to create platforms.",
   "author": "Zachary K. Watkins",
   "private": true,
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "engines": {
     "node": "18.13.0"
   },

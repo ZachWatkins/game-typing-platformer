@@ -1,5 +1,7 @@
-# Typing Game
+# Typing Platformer Game
 
-This is a typing game I made to learn the HTML5 Canvas API.
+A 2D platformer game where you type words to create platforms.
 
-It's a simple game that requires you to get through a level by typing words.
+## Installation
+
+## CLI Commands
