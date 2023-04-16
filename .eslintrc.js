@@ -16,24 +16,23 @@ module.exports = defineConfig({
         'dist/',
         'build/',
         'public/',
-        'includes/',
+        'includes/'
     ],
     plugins: ['jsdoc'],
     parserOptions: {
         sourceType: 'module',
-        ecmaVersion: 2018,
+        ecmaVersion: 2018
     },
     env: {
         browser: true,
         node: true,
         es2018: true,
-        commonjs: true,
+        commonjs: true
     },
     rules: {
         indent: ['error', 4],
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
-        'prefer-const': 'error',
-        'comma-dangle': ['error', 'always-multiline'],
-    },
+        'prefer-const': 'error'
+    }
 })

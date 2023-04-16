@@ -6,21 +6,12 @@
     },
     "editor.detectIndentation": false,
     "javascript.validate.enable": false,
-    "vite.autoStart": false,
     "eslint.debug": true,
     "eslint.experimental.useFlatConfig": true,
     "eslint.enable": true,
     "eslint.format.enable": true,
     "eslint.lintTask.enable": true,
-    "eslint.validate": ["javascript", "typescript"],
+    "eslint.validate": ["javascript", "typescript", "json", "markdown"],
     "eslint.run": "onSave",
-    "[javascript,typescript,json,markdown]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-    },
-    "[html]": {
-        "editor.defaultFormatter": "vscode.html-language-features"
-    },
-    "[markdown]": {
-        "files.trimTrailingWhitespace": false
-    }
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
 }

@@ -15,23 +15,23 @@ const jsdoc = require('eslint-plugin-jsdoc')
 const ignores = ['node_modules/', 'dist/', 'build/', 'public/', 'includes/']
 
 const MyConfig = {
-    files: ['**/*.{js,ts}', '*.{js,ts}'],
+    files: ['**/*.{js,ts}', '*.js'],
     ignores,
     plugins: {
-        jsdoc,
+        jsdoc
     },
     languageOptions: {
         parserOptions: {
             sourceType: 'module',
-            ecmaVersion: 2018,
+            ecmaVersion: 2018
         },
         globals: {
             ...globals.serviceworker,
             ...globals.browser,
             ...globals.node,
             ...globals.es2018,
-            ...globals.commonjs,
-        },
+            ...globals.commonjs
+        }
     },
     rules: {
         ...js.configs.recommended.rules,
@@ -39,30 +39,15 @@ const MyConfig = {
         indent: ['error', 4],
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
-        'prefer-const': 'error',
-        'comma-dangle': ['error', 'always-multiline'],
-    },
-}
-
-const MyTestConfig = {
-    files: ['**/*.{test,spec}.{js,ts}'],
-    languageOptions: {
-        globals: {
-            ...globals.jest,
-        },
-    },
+        'prefer-const': 'error'
+    }
 }
 
 const MyJsonConfig = {
     files: ['**/*.json', '*.json'],
     ignores,
     plugins: { jsonc },
-    rules: jsonc.configs['recommended-with-jsonc'].rules,
+    rules: jsonc.configs['recommended-with-jsonc'].rules
 }
 
-module.exports = defineFlatConfig([
-    { ignores },
-    MyConfig,
-    MyTestConfig,
-    MyJsonConfig,
-])
+module.exports = defineFlatConfig([{ ignores }, MyJsonConfig, MyConfig])
