@@ -2,7 +2,7 @@
     "editor.tabSize": 4,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+        "source.fixAll.eslint": true
     },
 	"editor.detectIndentation": false,
     "javascript.validate.enable": false,
@@ -15,19 +15,13 @@
     "eslint.validate": ["javascript", "html"],
     "eslint.run": "onSave",
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "[javascript,json,html,markdown]": {
-      "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "[javascript,json,jsonc,markdown]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "[html]": {
-      "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": false
-      }
+        "editor.defaultFormatter": "vscode.html-language-features"
     },
     "[markdown]": {
       "files.trimTrailingWhitespace": false
-    },
-    "cSpell.words": [
-        "jakesgordon",
-        "platformer"
-    ]
+    }
 }
