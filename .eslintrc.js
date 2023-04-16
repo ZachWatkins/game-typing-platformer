@@ -10,13 +10,15 @@
 const { defineConfig } = require('eslint-define-config')
 
 module.exports = defineConfig({
-    extends: [
-        'eslint:recommended',
-        'plugin:jsdoc/recommended',
-        'plugin:jsonc/recommended-with-jsonc',
+    extends: ['eslint:recommended', 'plugin:jsdoc/recommended'],
+    ignorePatterns: [
+        'node_modules/',
+        'dist/',
+        'build/',
+        'public/',
+        'includes/',
     ],
-    ignorePatterns: ['node_modules/', 'dist/', 'build/', 'public/', 'includes/'],
-    plugins: ['jsdoc', 'jsonc'],
+    plugins: ['jsdoc'],
     parserOptions: {
         sourceType: 'module',
         ecmaVersion: 2018,
