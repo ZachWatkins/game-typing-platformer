@@ -13,9 +13,10 @@ module.exports = defineConfig({
     extends: [
         'eslint:recommended',
         'plugin:jsdoc/recommended',
+        'plugin:jsonc/recommended-with-jsonc',
     ],
-    ignorePatterns: ['node_modules/', 'dist/', 'build/'],
-    plugins: ['jsdoc'],
+    ignorePatterns: ['node_modules/', 'dist/', 'build/', 'public/', 'includes/'],
+    plugins: ['jsdoc', 'jsonc'],
     parserOptions: {
         sourceType: 'module',
         ecmaVersion: 2018,
@@ -33,5 +34,4 @@ module.exports = defineConfig({
         'prefer-const': 'error',
         'comma-dangle': ['error', 'always-multiline'],
     },
-},
-)
+})

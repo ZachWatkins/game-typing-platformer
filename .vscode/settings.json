@@ -4,7 +4,7 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-	"editor.detectIndentation": false,
+    "editor.detectIndentation": false,
     "javascript.validate.enable": false,
     "vite.autoStart": false,
     "eslint.debug": true,
@@ -14,14 +14,13 @@
     "eslint.lintTask.enable": true,
     "eslint.validate": ["javascript", "html"],
     "eslint.run": "onSave",
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "[javascript,json,jsonc,markdown]": {
+    "[javascript,typescript,json,jsonc,markdown]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
     },
     "[markdown]": {
-      "files.trimTrailingWhitespace": false
+        "files.trimTrailingWhitespace": false
     }
 }

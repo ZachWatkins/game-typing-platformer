@@ -1,33 +1,36 @@
 {
-  "name": "game-typing-platformer",
-  "description": "A 2D platformer game where you type words to create platforms.",
-  "author": "Zachary K. Watkins",
-  "private": true,
-  "license": "MIT",
-  "version": "0.1.0",
-  "engines": {
-    "node": "18.13.0"
-  },
-  "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "doc": "jsdoc -d guides src/*.js"
-  },
-  "dependencies": {
-    "@d-pollard/planck": "^1.0.5"
-  },
-  "devDependencies": {
-    "eslint": "^8.0.1",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-define-config": "^1.17.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-jsdoc": "^40.1.2",
-    "eslint-plugin-promise": "^6.0.0",
-    "vite": "^4.2.1",
-    "vite-plugin-eslint": "^1.8.1"
-  }
+    "name": "game-typing-platformer",
+    "description": "A 2D platformer game where you type words to create platforms.",
+    "author": "Zachary K. Watkins",
+    "private": true,
+    "license": "MIT",
+    "version": "0.1.0",
+    "engines": {
+        "node": "18.13.0"
+    },
+    "scripts": {
+        "start": "vite",
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "doc": "jsdoc -d guides src/*.js",
+        "tsc": "tsc"
+    },
+    "dependencies": {
+        "@d-pollard/planck": "^1.0.5",
+        "typescript": "^5.0.4"
+    },
+    "devDependencies": {
+        "eslint": "^8.0.1",
+        "eslint-config-standard": "^17.0.0",
+        "eslint-define-config": "^1.17.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-jsdoc": "^40.1.2",
+        "eslint-plugin-jsonc": "^2.7.0",
+        "eslint-plugin-promise": "^6.0.0",
+        "vite": "^4.2.1",
+        "vite-plugin-eslint": "^1.8.1"
+    }
 }
