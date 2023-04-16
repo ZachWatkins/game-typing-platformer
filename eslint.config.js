@@ -15,7 +15,7 @@ const jsdoc = require('eslint-plugin-jsdoc')
 const ignores = ['node_modules/', 'dist/', 'build/', 'public/', 'includes/']
 
 const MyConfig = {
-    files: ['**/*.{js,ts}', '*.js'],
+    files: ['**/*.js', '*.js'],
     ignores,
     plugins: {
         jsdoc
