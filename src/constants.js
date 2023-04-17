@@ -53,7 +53,7 @@ export const COLOR = {
     GOLD: 'gold',
 }
 export const COLORS = [ COLOR.YELLOW, COLOR.BRICK, COLOR.PINK, COLOR.PURPLE, COLOR.GREY ]
-export const KEY = { SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 }
+export const KEY = { SPACE: ' ', LEFT: 'a', UP: 'w', RIGHT: 'd', DOWN: 's' }
 
 export default {
     MAP,
