@@ -16,6 +16,7 @@ type PlayerInput = {
     jump: boolean,
 }
 
+
 export const PlayerEntity: Entity = {
     type: 'player',
     width: TILE,
@@ -24,12 +25,14 @@ export const PlayerEntity: Entity = {
     y: 0,
 }
 
-export const PlayerInput = {
-    up: false,
-    down: false,
-    left: false,
-    right: false,
-    jump: false,
+export const PlayerInput = (): PlayerInput => {
+    return {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        jump: false,
+    }
 }
 
 export const InputMap = {
@@ -44,18 +47,21 @@ export const InputMap = {
     ArrowDown: 'down',
 }
 
-export const PlayerController = function (player: Entity) {
-    this.player = player;
-    this.input = { ...PlayerInput };
-}
-PlayerController.prototype = {
-    player: PlayerEntity,
-    input: PlayerInput,
-    listening: false,
-    listen: function () {
+export class PlayerController {
+    public player!: Entity
+    public input!: PlayerInput
+    public listening: boolean = false
+    construct(player: Entity) {
+        this.player = player
+        this.input = PlayerInput
+    }
+
+    listen() {
         this.listening = true;
-        window.addEventListener('keydown', (e: KeyboardEvent) => {
-            this.input[InputMap[e.key]] = e.type === 'keydown';
-        });
+        window.addEventListener('keydown', this.handle);
+    }
+
+    handle(e: KeyboardEvent) {
+        this.input[InputMap[e.key]] = e.type === 'keydown';
     }
 }

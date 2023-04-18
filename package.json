@@ -5,6 +5,12 @@
     "private": true,
     "license": "MIT",
     "version": "0.1.0",
+    "main": "",
+    "homepage": "https://github.com/zachwatkins/game-typing-platformer",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zachwatkins/game-typing-platformer.git"
+    },
     "engines": {
         "node": "18.13.0"
     },
@@ -20,18 +26,19 @@
         "tsc": "tsc"
     },
     "dependencies": {
-        "@d-pollard/planck": "^1.0.5",
-        "typescript": "^5.0.4"
+        "@d-pollard/planck": "^1.0.5"
     },
     "devDependencies": {
         "eslint": "^8.0.1",
         "eslint-config-standard": "^17.0.0",
         "eslint-define-config": "^1.17.0",
         "eslint-plugin-import": "^2.25.2",
-        "eslint-plugin-jsdoc": "^40.1.2",
         "eslint-plugin-jsonc": "^2.7.0",
         "eslint-plugin-promise": "^6.0.0",
+        "typescript": "^5.0.4",
         "vite": "^4.2.1",
-        "vite-plugin-eslint": "^1.8.1"
-    }
+        "vite-plugin-eslint": "^1.8.1",
+        "vite-plugin-node-polyfills": "^0.8.1"
+    },
+    "types": "index.d.ts"
 }

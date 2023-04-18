@@ -1,4 +1,15 @@
 /**
+ * Create the root application container.
+ */
+export function createRoot(container: HTMLElement) {
+    return {
+        render: function (component: any) {
+            container.innerHTML = component
+        }
+    }
+}
+
+/**
  * Get the current timestamp in milliseconds.
  *
  * @returns {number} The current timestamp in milliseconds.
@@ -28,7 +39,7 @@ export function bound(x, min, max) {
  */
 export function get(url, onsuccess) {
     var request = new XMLHttpRequest()
-    request.onreadystatechange = function() {
+    request.onreadystatechange = function () {
         if ((request.readyState == 4) && (request.status == 200))
             onsuccess(request)
     }
@@ -51,9 +62,9 @@ export function get(url, onsuccess) {
  */
 export function overlap(x1, y1, w1, h1, x2, y2, w2, h2) {
     return !(((x1 + w1 - 1) < x2) ||
-             ((x2 + w2 - 1) < x1) ||
-             ((y1 + h1 - 1) < y2) ||
-             ((y2 + h2 - 1) < y1))
+        ((x2 + w2 - 1) < x1) ||
+        ((y1 + h1 - 1) < y2) ||
+        ((y2 + h2 - 1) < y1))
 }
 
 export default {

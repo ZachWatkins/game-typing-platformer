@@ -10,7 +10,7 @@
 const { defineConfig } = require('eslint-define-config')
 
 module.exports = defineConfig({
-    extends: ['eslint:recommended', 'plugin:jsdoc/recommended'],
+    extends: ['eslint:recommended'],
     ignorePatterns: [
         'node_modules/',
         'dist/',
