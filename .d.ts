@@ -3,37 +3,42 @@
 // Project: [app]
 // Definitions by: [Zachary K. Watkins] <[https://zachwatkins.dev]>
 
-declare interface Point {
-    x: number,
-    y: number,
-}
+declare type Point = [number, number]
 
-declare interface Line {
+declare type Size = [number, number]
+
+declare interface Platform {
     top: number,
     left: number,
     right: number,
 }
 
-declare interface Size {
+declare interface Rect {
+    x: number,
+    y: number,
     width: number,
     height: number,
 }
 
-declare interface Rect extends Line {
+declare interface Bounds {
+    top: number,
+    left: number,
+    right: number,
     bottom: number,
 }
 
-declare interface Collider extends Rect {
-    collides: true,
+declare interface EntityAppearance {
+    backgroundColor: string,
 }
 
-declare interface Platform extends Line {
-    collides: true,
-}
-
-declare interface Entity extends Point, Collider, Size {
+declare interface Entity {
+    id: number,
     type: string,
-    collides: false,
+    render: boolean,
+    collide: boolean,
+    point: Point,
+    size: Size,
+    appearance: EntityAppearance,
 }
 
 declare type PlayerInput = {
