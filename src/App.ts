@@ -1,5 +1,5 @@
-import { PlayerEntity } from './player'
+import { PlayerElement } from './model/player'
 
-export default function Game() {
-    return `<div style={{ width: PlayerEntity.width, height: PlayerEntity.height }}></div>`
+export default function App(): HTMLElement {
+    return PlayerElement()
 }

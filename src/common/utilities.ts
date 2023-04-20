@@ -1,15 +1,4 @@
 /**
- * Create the root application container.
- */
-export function createRoot(container: HTMLElement) {
-    return {
-        render: function (component: any) {
-            container.innerHTML = component
-        }
-    }
-}
-
-/**
  * Get the current timestamp in milliseconds.
  *
  * @returns {number} The current timestamp in milliseconds.

@@ -1,23 +1,8 @@
-import { TILE, KEY } from './constants'
+import { TILE, KEY } from '../common/constants'
+import { Entity, EntityElement } from './base'
+import { PlayerInput } from '../controller/input'
 
-type Entity = {
-    type: string,
-    width: number,
-    height: number,
-    x: number,
-    y: number,
-}
-
-type PlayerInput = {
-    up: boolean,
-    down: boolean,
-    left: boolean,
-    right: boolean,
-    jump: boolean,
-}
-
-
-export const PlayerEntity: Entity = {
+const PlayerEntity: Entity = {
     type: 'player',
     width: TILE,
     height: TILE,
@@ -25,7 +10,11 @@ export const PlayerEntity: Entity = {
     y: 0,
 }
 
-export const PlayerInput = (): PlayerInput => {
+export function PlayerElement(): HTMLElement {
+    return EntityElement(PlayerEntity)
+}
+
+export const CreatePlayerInput = (): PlayerInput => {
     return {
         up: false,
         down: false,
@@ -49,11 +38,10 @@ export const InputMap = {
 
 export class PlayerController {
     public player!: Entity
-    public input!: PlayerInput
+    public input: PlayerInput = CreatePlayerInput()
     public listening: boolean = false
     construct(player: Entity) {
         this.player = player
-        this.input = PlayerInput
     }
 
     listen() {

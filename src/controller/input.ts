@@ -1,5 +1,5 @@
 
-export const PlayerInput = {
+const PlayerInput: PlayerInput = {
     up: false,
     down: false,
     left: false,
