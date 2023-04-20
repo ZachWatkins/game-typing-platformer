@@ -15,7 +15,7 @@ export function timestamp() {
  * @param {number} max The maximum value.
  * @returns {number} The constrained value.
  */
-export function bound(x, min, max) {
+export function bound(x: number, min: number, max: number) {
     return Math.max(min, Math.min(max, x))
 }
 
@@ -26,7 +26,7 @@ export function bound(x, min, max) {
  * @param {Function} onsuccess The function to call when the file is loaded.
  * @returns {void}
  */
-export function get(url, onsuccess) {
+export function get(url: string, onsuccess: Function) {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if ((request.readyState == 4) && (request.status == 200))
@@ -49,7 +49,7 @@ export function get(url, onsuccess) {
  * @param {number} h2 The height of the second rectangle.
  * @returns {boolean} True if the rectangles overlap, false otherwise.
  */
-export function overlap(x1, y1, w1, h1, x2, y2, w2, h2) {
+export function overlap(x1: number, y1: number, w1: number, h1: number, x2: number, y2: number, w2: number, h2: number) {
     return !(((x1 + w1 - 1) < x2) ||
         ((x2 + w2 - 1) < x1) ||
         ((y1 + h1 - 1) < y2) ||

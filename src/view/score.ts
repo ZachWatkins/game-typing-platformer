@@ -1,12 +1,12 @@
 /**
  * Counts the player's score.
  *
- * @param {Node} element The DOM node to attach the counter to.
+ * @param {Element} element The DOM node to attach the counter to.
  * @returns {void}
  */
-export function setupScore(element) {
+export function setupScore(element: Element) {
     let counter = 0
-    const setScore = (count) => {
+    const setScore = (count: number) => {
         counter = count
         element.innerHTML = `Score: ${counter}`
     }

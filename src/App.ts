@@ -1,5 +1,6 @@
-import { PlayerElement } from './model/player'
+import { Player } from './model/entities'
+import { renderEntity } from './view/entity'
 
-export default function App(): HTMLElement {
-    return PlayerElement()
+export default function App(): Node {
+    return renderEntity(Player)
 }

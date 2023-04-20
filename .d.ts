@@ -35,6 +35,7 @@ declare interface Entity {
     id: number,
     type: string,
     render: boolean,
+    interact: boolean,
     collide: boolean,
     point: Point,
     size: Size,

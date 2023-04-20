@@ -5,7 +5,7 @@
     "private": true,
     "license": "MIT",
     "version": "0.1.0",
-    "main": "",
+    "main": "src/main.ts",
     "homepage": "https://github.com/zachwatkins/game-typing-platformer",
     "repository": {
         "type": "git",
