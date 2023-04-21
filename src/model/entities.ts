@@ -1,4 +1,4 @@
-import { TILE } from '../common/constants'
+import { TILE } from '../constants'
 
 export const Player: Entity = {
     id: 1,
