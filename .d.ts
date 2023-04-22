@@ -42,7 +42,7 @@ declare interface Entity {
     appearance: EntityAppearance,
 }
 
-declare type PlayerInput = {
+declare type Controller = {
     up: boolean,
     down: boolean,
     left: boolean,
