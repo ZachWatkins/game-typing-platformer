@@ -15,17 +15,7 @@ type ObservedCodes = {
 
 export class InputController {
 
-    code: ObservedCodes = Object.seal({
-        ArrowUp: false,
-        ArrowDown: false,
-        ArrowLeft: false,
-        ArrowRight: false,
-        Space: false,
-        WKey: false,
-        AKey: false,
-        SKey: false,
-        DKey: false,
-    })
+    code: ObservedCodes
     source: HasEventListeners
     dispatch: Dispatcher
     onEvent: string
@@ -36,11 +26,17 @@ export class InputController {
         dispatch: Dispatcher,
         on: string,
         off: string,
+        codes: string[],
     }) {
         this.source = opts.source
         this.dispatch = opts.dispatch
         this.onEvent = opts.on
         this.offEvent = opts.off
+        this.code = {}
+        for (let i = opts.codes.length - 1; i >= 0; i--) {
+            this.code[opts.codes[i]] = false
+        }
+        Object.seal(this.code)
     }
 
     listen(): void {
