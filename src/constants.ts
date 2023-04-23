@@ -10,11 +10,11 @@ export const METER = TILE
 export const GRAVITY = 9.8 * 6
 
 /**
- * Default max horizontal speed (15 tiles per second).
+ * Default max horizontal speed (60 tiles per second).
  *
  * @type {number}
  */
-export const MAXDX = 15
+export const MAXDX = 60
 
 /**
  * Default max vertical speed (60 tiles per second).
@@ -28,14 +28,14 @@ export const MAXDY = 60
  *
  * @type {number}
  */
-export const ACCEL = 1/2
+export const ACCEL = 1 / 2
 
 /**
  * Default take 1/6 second to stop from maxdx (horizontal friction)
  *
  * @type {number}
  */
-export const FRICTION = 1/6
+export const FRICTION = 1 / 6
 
 /**
  * Default player jump impulse.
@@ -52,7 +52,7 @@ export const COLOR = {
     SLATE: '#53777A',
     GOLD: 'gold',
 }
-export const COLORS = [ COLOR.YELLOW, COLOR.BRICK, COLOR.PINK, COLOR.PURPLE, COLOR.GREY ]
+export const COLORS = [COLOR.YELLOW, COLOR.BRICK, COLOR.PINK, COLOR.PURPLE, COLOR.GREY]
 export const KEY = { SPACE: ' ', LEFT: 'a', UP: 'w', RIGHT: 'd', DOWN: 's' }
 
 export default {
