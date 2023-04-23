@@ -50,15 +50,6 @@ declare type Controller = {
     jump: boolean,
 }
 
-declare interface InputEvent {
-    code: string,
-}
-
-declare type HasEventListeners = {
-    addEventListener: (type: string, listener: (event: InputEvent) => void) => void,
-    removeEventListener: (type: string, listener: (event: InputEvent) => void) => void,
-}
-
 declare interface RenderContext {
     querySelector: (selector: string) => Node | null,
     createElement: (tag: string) => Node,
