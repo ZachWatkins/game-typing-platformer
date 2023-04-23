@@ -13,48 +13,29 @@ type ObservedCodes = {
     [code: string]: boolean,
 }
 
-export class InputController {
+export function InputController(opts: {
+    source: HasEventListeners,
+    dispatch: Dispatcher,
+    on: string,
+    off: string,
+    codes: string[],
+}) {
+    const state = opts.codes.reduce((acc, code) => {
+        acc[code] = false
+        return acc
+    }, {} as ObservedCodes)
 
-    code: ObservedCodes
-    source: HasEventListeners
-    dispatch: Dispatcher
-    onEvent: string
-    offEvent: string
-
-    constructor(opts: {
-        source: HasEventListeners,
-        dispatch: Dispatcher,
-        on: string,
-        off: string,
-        codes: string[],
-    }) {
-        this.source = opts.source
-        this.dispatch = opts.dispatch
-        this.onEvent = opts.on
-        this.offEvent = opts.off
-        this.code = {}
-        for (let i = opts.codes.length - 1; i >= 0; i--) {
-            this.code[opts.codes[i]] = false
+    opts.source.addEventListener(opts.on, (event: InputEvent): void => {
+        if (state[event.code] === false) {
+            state[event.code] = true
+            opts.dispatch(event.code, true)
         }
-        Object.seal(this.code)
-    }
+    })
 
-    listen(): void {
-        this.source.addEventListener(this.onEvent, this.on)
-        this.source.addEventListener(this.offEvent, this.off)
-    }
-
-    on(event: InputEvent): void {
-        if (this.code.hasOwnProperty(event.code) && !this.code[event.code]) {
-            this.code[event.code] = true
-            this.dispatch(event.code, true)
+    opts.source.addEventListener(opts.off, (event: InputEvent): void => {
+        if (state[event.code] === true) {
+            state[event.code] = false
+            opts.dispatch(event.code, false)
         }
-    }
-
-    off(event: InputEvent): void {
-        if (this.code.hasOwnProperty(event.code) && this.code[event.code]) {
-            this.code[event.code] = false
-            this.dispatch(event.code, false)
-        }
-    }
+    })
 }
