@@ -13,16 +13,10 @@ const keyState: StateObject = {
     ArrowLeft: false,
     ArrowDown: false,
     ArrowRight: false,
-    Space: false,
     KeyW: false,
     KeyA: false,
     KeyS: false,
     KeyD: false,
-}
-
-const axisState: AxisState = {
-    x: 0,
-    y: 0,
 }
 
 const keyAxis: { [code: string]: AxisModifier } = {
@@ -36,29 +30,31 @@ const keyAxis: { [code: string]: AxisModifier } = {
     KeyD: { name: 'x', value: 1 },
 }
 
-export function KeyboardController(
-    source: HasEventListeners,
-    handle: (code: string, state: boolean, axis: AxisState) => void
-) {
+export function KeyboardController(source: HasEventListeners): AxisState {
+
+    const axisState: AxisState = {
+        x: 0,
+        y: 0,
+    }
 
     const handleOn = (event: { code: string }): void => {
-        if (keyState[event.code] === false) {
+        if (keyState.hasOwnProperty(event.code)) {
             keyState[event.code] = true
             let axis = keyAxis[event.code]
-            axisState[axis.name] += axis.value
-            handle(event.code, true, axisState)
+            axisState[axis.name] = axis.value
         }
     }
 
     const handleOff = (event: { code: string }): void => {
-        if (keyState[event.code] === true) {
+        if (keyState.hasOwnProperty(event.code)) {
             keyState[event.code] = false
             let axis = keyAxis[event.code]
-            axisState[axis.name] += axis.value
-            handle(event.code, false, axisState)
+            axisState[axis.name] = 0
         }
     }
 
     source.addEventListener('keydown', handleOn)
     source.addEventListener('keyup', handleOff)
+
+    return axisState
 }
