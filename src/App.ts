@@ -1,17 +1,12 @@
 import { KeyboardController } from './controller/input'
+import { createRenderLoop } from './view/loop'
 import { Player, updatePlayer } from './model/entities'
 import { renderEntity } from './view/entity'
 import { updateStats } from './stats'
 
 const PlayerNode: Node = renderEntity(Player)
 const AXIS: AxisState = KeyboardController(window)
-
-// Rendering context.
-let now: number
-let last: number = window.performance.now()
-const fps = 60
-const step = 1 / fps
-let dt: number = 0
+const loop = createRenderLoop(update, render)
 
 function update(delta: number) {
     updatePlayer(delta, AXIS)
@@ -36,19 +31,7 @@ function render(delta: number) {
     PlayerNode.style.top = Player.point[1] + 'px'
 }
 
-function frame() {
-    now = window.performance.now()
-    dt = dt + Math.min(1, (now - last) / 1000);
-    while (dt > step) {
-        dt = dt - step;
-        update(step);
-    }
-    render(dt);
-    last = now;
-    requestAnimationFrame(frame)
-}
-
 export default function App(): Node {
-    frame()
+    loop()
     return PlayerNode
 }
