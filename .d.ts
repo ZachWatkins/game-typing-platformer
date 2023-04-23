@@ -42,6 +42,18 @@ declare interface Entity {
     appearance: EntityAppearance,
 }
 
+declare type AxisState = {
+    x: -1 | 0 | 1,
+    y: -1 | 0 | 1,
+}
+d
+declare type AxisModifier = {
+    name: 'x' | 'y',
+    value: -1 | 1,
+}
+
+declare type StateObject = { [code: string]: boolean }
+
 declare type Controller = {
     up: boolean,
     down: boolean,

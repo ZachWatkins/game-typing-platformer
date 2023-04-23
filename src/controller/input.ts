@@ -8,29 +8,57 @@ type HasEventListeners = {
     removeEventListener: (type: string, listener: (event: { code: string }) => void) => void,
 }
 
-export function InputController(opts: {
+const keyState: StateObject = {
+    ArrowUp: false,
+    ArrowLeft: false,
+    ArrowDown: false,
+    ArrowRight: false,
+    Space: false,
+    KeyW: false,
+    KeyA: false,
+    KeyS: false,
+    KeyD: false,
+}
+
+const axisState: AxisState = {
+    x: 0,
+    y: 0,
+}
+
+const keyAxis: { [code: string]: AxisModifier } = {
+    ArrowUp: { name: 'y', value: -1 },
+    ArrowLeft: { name: 'x', value: -1 },
+    ArrowDown: { name: 'y', value: 1 },
+    ArrowRight: { name: 'x', value: 1 },
+    KeyW: { name: 'y', value: -1 },
+    KeyA: { name: 'x', value: -1 },
+    KeyS: { name: 'y', value: 1 },
+    KeyD: { name: 'x', value: 1 },
+}
+
+export function KeyboardController(
     source: HasEventListeners,
-    codes: string[],
-    onEvent: string,
-    offEvent: string,
-    dispatch: (code: string, state: boolean) => void,
-}) {
-    const state: { [code: string]: boolean } = {}
-    for (let i = opts.codes.length - 1; i >= 0; i--) {
-        state[opts.codes[i]] = false
+    handle: (code: string, state: boolean, axis: AxisState) => void
+) {
+
+    const handleOn = (event: { code: string }): void => {
+        if (keyState[event.code] === false) {
+            keyState[event.code] = true
+            let axis = keyAxis[event.code]
+            axisState[axis.name] += axis.value
+            handle(event.code, true, axisState)
+        }
     }
 
-    opts.source.addEventListener(opts.onEvent, (event: { code: string }): void => {
-        if (state[event.code] === false) {
-            state[event.code] = true
-            opts.dispatch(event.code, true)
+    const handleOff = (event: { code: string }): void => {
+        if (keyState[event.code] === true) {
+            keyState[event.code] = false
+            let axis = keyAxis[event.code]
+            axisState[axis.name] += axis.value
+            handle(event.code, false, axisState)
         }
-    })
+    }
 
-    opts.source.addEventListener(opts.offEvent, (event: { code: string }): void => {
-        if (state[event.code] === true) {
-            state[event.code] = false
-            opts.dispatch(event.code, false)
-        }
-    })
+    source.addEventListener('keydown', handleOn)
+    source.addEventListener('keyup', handleOff)
 }
