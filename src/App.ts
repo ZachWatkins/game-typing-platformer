@@ -1,10 +1,10 @@
-import { KeyboardController } from './controller/input'
+import { updateStats } from './stats'
+import { renderPlayer } from './view/player'
+import { KeyboardController } from './controller/keyboard'
 import { createRenderLoop } from './view/loop'
 import { Player, updatePlayer } from './model/entities'
-import { renderEntity } from './view/entity'
-import { updateStats } from './stats'
 
-const PlayerNode: Node = renderEntity(Player)
+const PlayerNode: Node = renderPlayer()
 const AXIS: AxisState = KeyboardController(window)
 const loop = createRenderLoop(update, render)
 

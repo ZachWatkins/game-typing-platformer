@@ -1,24 +1,28 @@
 /**
  * The game rendering loop component.
+ *
+ * @author Zachary K. Watkins
  */
+import { STEP } from '../constants'
+import update from '../controller/update'
+import render from './render'
 
 // Rendering context.
 let now: number
 let last: number = window.performance.now()
-const fps = 60
-const step = 1 / fps
 let dt: number = 0
 
-export function createRenderLoop(update: Function, render: Function) {
+export function createRenderLoop(): () => void {
 
-    function frame() {
+    function frame(): void {
         now = window.performance.now()
         dt = dt + Math.min(1, (now - last) / 1000);
-        while (dt > step) {
-            dt = dt - step;
-            update(step);
+        while (dt > STEP) {
+            dt = dt - STEP;
+            update(STEP);
         }
-        render(dt);
+        update(dt);
+        render();
         last = now;
         requestAnimationFrame(frame)
     }
