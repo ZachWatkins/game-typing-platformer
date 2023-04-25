@@ -16,14 +16,14 @@ export const GRAVITY = 9.8 * 6
  *
  * @type {number}
  */
-export const MAXDX = 60
+export const MAXDX = 120
 
 /**
  * Default max vertical speed (60 tiles per second).
  *
  * @type {number}
  */
-export const MAXDY = 60
+export const MAXDY = 120
 
 /**
  * Default take 1/2 second to reach maxdx (horizontal acceleration).
@@ -56,14 +56,6 @@ export const COLOR = {
 }
 export const COLORS = [COLOR.YELLOW, COLOR.BRICK, COLOR.PINK, COLOR.PURPLE, COLOR.GREY]
 export const KEY = { SPACE: ' ', LEFT: 'a', UP: 'w', RIGHT: 'd', DOWN: 's' }
-/**
- * Get the current timestamp in milliseconds.
- *
- * @returns {number} The current timestamp in milliseconds.
- */
-export function timestamp() {
-    return window.performance && window.performance.now ? window.performance.now() : new Date().getTime()
-}
 
 /**
  * Constrain a value to a range.
@@ -129,7 +121,6 @@ export default {
     COLOR,
     COLORS,
     KEY,
-    timestamp,
     bound,
     get,
     overlap,

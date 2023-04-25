@@ -3,7 +3,7 @@
  *
  * @author Zachary K. Watkins
  */
-import { STEP } from '../constants'
+import { STEP } from '../common/constants'
 import update from '../controller/update'
 import render from './render'
 

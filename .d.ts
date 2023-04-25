@@ -39,6 +39,7 @@ declare interface Entity {
     collide: boolean,
     point: Point,
     size: Size,
+    maxSpeed: number,
     appearance: EntityAppearance,
 }
 

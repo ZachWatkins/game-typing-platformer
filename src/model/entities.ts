@@ -1,4 +1,4 @@
-import { TILE } from '../constants'
+import { TILE } from '../common/constants'
 
 export const Player: Entity = {
     id: 1,
@@ -8,6 +8,7 @@ export const Player: Entity = {
     collide: true,
     point: [0, 0],
     size: [TILE, TILE],
+    maxSpeed: TILE,
     appearance: {
         backgroundColor: 'red',
     },
@@ -21,6 +22,7 @@ export const Coin: Entity = {
     collide: false,
     point: [0, 0],
     size: [TILE, TILE],
+    maxSpeed: TILE,
     appearance: {
         backgroundColor: 'yellow',
     },

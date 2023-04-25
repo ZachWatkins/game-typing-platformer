@@ -1,10 +1,14 @@
 /**
- * Apply changes to the game state based on a delta time.
+ * Apply changes to the game objects before those changes are rendered.
  *
  * @author Zachary K. Watkins
  */
-
+import { KeyboardController } from './keyboard'
 import { updatePlayer } from './player'
+import { updateStats } from '../common/stats'
+
+const AXIS: AxisState = KeyboardController(window)
+
 
 /**
  * Function which updates values before they are rendered.
@@ -13,5 +17,6 @@ import { updatePlayer } from './player'
  * @returns {void}
  */
 export default function update(delta: number): void {
-    updatePlayer(delta)
+    updatePlayer(delta, AXIS)
+    updateStats({ axis: AXIS })
 }
