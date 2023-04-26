@@ -9,93 +9,63 @@ type HasEventListeners = {
     removeEventListener: (type: string, listener: (event: { code: string }) => void) => void,
 }
 type Subscriber = (event: { code: string }, axis: AxisState, keyState?: StateObject) => void
+type KeyAxisValue = { [key: string]: -1 | 1 }
+type KeyAxisMap = { [key: string]: 'x' | 'y' }
 
 const keyState: StateObject = {
-    ArrowUp: false,
-    ArrowLeft: false,
-    ArrowDown: false,
-    ArrowRight: false,
     KeyW: false,
     KeyA: false,
     KeyS: false,
     KeyD: false,
 }
 
+const keyAxis: KeyAxisMap = {
+    KeyA: 'x',
+    KeyD: 'x',
+    KeyW: 'y',
+    KeyS: 'y',
+}
+
+const keyValue: KeyAxisValue = {
+    KeyA: -1,
+    KeyD: 1,
+    KeyW: -1,
+    KeyS: 1,
+}
+
 const keySubscribers: Function[] = []
-const publish: Subscriber = (event, axis) => {
+export const subscribe = (fn: Subscriber): void => {
+    console.log('subscribe')
+    keySubscribers.push(fn)
+}
+const publish: Subscriber = (event, axis): void => {
+    if (!keySubscribers.length) return
     const len = keySubscribers.length
     for (let i = 0; i < len; i--) {
-        keySubscribers[i](event, axis, keyState)
+        keySubscribers[i](event, axis)
     }
-}
-export const subscribe = (fn: Subscriber): void => {
-    keySubscribers.push(fn)
 }
 
 export function KeyboardController(source: HasEventListeners): AxisState {
 
     let axis: AxisState = { x: 0, y: 0 }
 
-    /**
-     * The goal of this function is to only detect axis state keys once and assign the current axis to the axis state object.
-     * It is optimistic about the left and right axis keys being pressed.
-     * It is pessimistic about the up and down axis keys being pressed.
-     *
-     * @returns {void}
-     */
-    const setAxis = (): void => {
-        if (keyState.ArrowLeft || keyState.KeyA) {
-            axis.x = -1
-            if (keyState.ArrowUp || keyState.KeyW) {
-                axis.y = -1
-                return
-            }
-            if (keyState.ArrowDown || keyState.KeyS) {
-                axis.y = 1
-                return
-            }
-            axis.y = 0
-            return
-        }
-        if (keyState.ArrowRight || keyState.KeyD) {
-            axis.x = 1
-            if (keyState.ArrowUp || keyState.KeyW) {
-                axis.y = -1
-                return
-            }
-            if (keyState.ArrowDown || keyState.KeyS) {
-                axis.y = 1
-                return
-            }
-            axis.y = 0
-            return
-        }
-        if (keyState.ArrowUp || keyState.KeyW) {
-            axis.y = -1
-            axis.x = 0
-            return
-        }
-        if (keyState.ArrowDown || keyState.KeyS) {
-            axis.y = 1
-            axis.x = 0
-            return
-        }
-        axis.x = 0
-        axis.y = 0
+    const setAxis = (key: string, pressed: boolean): void => {
+        axis[keyAxis[key]] = pressed ? keyValue[key] : 0
     }
 
     const handleOn = (event: { code: string }): void => {
         if (keyState[event.code] === false) {
             keyState[event.code] = true
-            setAxis()
-            if (keySubscribers.length) publish(event, axis)
+            setAxis(event.code, true)
+            publish(event, axis)
         }
     }
 
     const handleOff = (event: { code: string }): void => {
         if (keyState[event.code] === true) {
             keyState[event.code] = false
-            setAxis()
+            setAxis(event.code, false)
             if (keySubscribers.length) publish(event, axis)
         }
     }
