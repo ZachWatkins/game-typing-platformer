@@ -4,7 +4,6 @@
  * @author Zachary K. Watkins
  * @module stats.js
  */
-import { subscribe } from '../controller/keyboard'
 
 let stats: HTMLElement
 
@@ -15,15 +14,6 @@ const statsValue: { [key: string]: any } = {
         y: 0,
     },
 }
-
-subscribe((event, axisState, keyState) => {
-    statsValue.axis = axisState
-    statsValue.kb = {
-        code: event.code,
-        time: performance.now(),
-        keys: keyState,
-    }
-})
 
 const create = (): HTMLElement => {
     stats = document.createElement('div')
