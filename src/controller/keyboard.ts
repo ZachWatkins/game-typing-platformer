@@ -11,6 +11,7 @@ type HasEventListeners = {
 type Subscriber = (event: { code: string }, axis: AxisState, keyState?: StateObject) => void
 type KeyAxisValue = { [key: string]: -1 | 1 }
 type KeyAxisMap = { [key: string]: 'x' | 'y' }
+type KeyMap = { [key: string]: string }
 
 const keyState: StateObject = {
     KeyW: false,
@@ -20,28 +21,34 @@ const keyState: StateObject = {
 }
 
 const keyAxis: KeyAxisMap = {
-    KeyA: 'x',
-    KeyD: 'x',
     KeyW: 'y',
+    KeyA: 'x',
     KeyS: 'y',
+    KeyD: 'x',
 }
 
 const keyValue: KeyAxisValue = {
-    KeyA: -1,
-    KeyD: 1,
     KeyW: -1,
+    KeyA: -1,
     KeyS: 1,
+    KeyD: 1,
+}
+
+const keyAxisInverted: KeyMap = {
+    KeyW: 'KeyS',
+    KeyA: 'KeyD',
+    KeyS: 'KeyW',
+    KeyD: 'KeyA',
 }
 
 const keySubscribers: Function[] = []
 export const subscribe = (fn: Subscriber): void => {
-    console.log('subscribe')
     keySubscribers.push(fn)
 }
 const publish: Subscriber = (event, axis): void => {
     if (!keySubscribers.length) return
     const len = keySubscribers.length
-    for (let i = 0; i < len; i--) {
+    for (let i = 0; i < len; i++) {
         keySubscribers[i](event, axis)
     }
 }
@@ -52,6 +59,9 @@ export function KeyboardController(source: HasEventListeners): AxisState {
 
     const setAxis = (key: string, pressed: boolean): void => {
         axis[keyAxis[key]] = pressed ? keyValue[key] : 0
+        if (!axis[keyAxis[key]]) {
+            axis[keyAxis[key]] = keyState[keyAxisInverted[key]] ? keyValue[keyAxisInverted[key]] : 0
+        }
     }
 
     const handleOn = (event: { code: string }): void => {

@@ -8,7 +8,7 @@ export const Player: Entity = {
     collide: true,
     point: [0, 0],
     size: [TILE, TILE],
-    maxSpeed: TILE,
+    maxSpeed: TILE * 8,
     appearance: {
         backgroundColor: 'red',
     },

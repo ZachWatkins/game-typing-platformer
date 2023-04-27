@@ -67,3 +67,8 @@ declare interface RenderContext {
     querySelector: (selector: string) => Node | null,
     createElement: (tag: string) => Node,
 }
+
+declare interface HasEventListeners {
+    addEventListener: (type: string, listener: (event: { code: string }) => void) => void,
+    removeEventListener: (type: string, listener: (event: { code: string }) => void) => void,
+}
