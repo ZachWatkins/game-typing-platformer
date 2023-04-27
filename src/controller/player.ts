@@ -43,16 +43,15 @@ const keyMap: KeyMap = {
     },
 }
 
-const axisDegreeMapCartesian: { [key: string]: -1 | 0 | 45 | 90 | 135 | 180 | 225 | 270 | 315 } = {
-    '0,0': -1,
-    '0,-1': 270,
-    '1,-1': 315,
-    '1,0': 0,
-    '1,1': 45,
-    '0,1': 90,
-    '-1,1': 135,
-    '-1,0': 180,
-    '-1,-1': 225,
+const axisToDegrees: { [key: string]: -1 | 0 | 45 | 90 | 135 | 180 | 225 | 270 | 315 } = {
+    '0-1': 270,
+    '1-1': 315,
+    '10': 0,
+    '11': 45,
+    '01': 90,
+    '-11': 135,
+    '-10': 180,
+    '-1-1': 225,
 }
 
 const axis: AxisState = {
@@ -76,32 +75,17 @@ const keyUp = (event: { code: string }): void => {
 }
 
 export function updatePlayer(delta: number): void {
-    if (!axis.x && !axis.y) return
-    const degrees = axisDegreeMapCartesian[axis.x + ',' + axis.y]
-    const modifier = [
+    if (0 === axis.x && 0 === axis.y) return
+    const degrees = axisToDegrees[axis.x + axis.y]
+    const step = [
         Player.maxSpeed * delta * Math.cos(degrees * Math.PI / 180),
         Player.maxSpeed * delta * Math.sin(degrees * Math.PI / 180)
     ]
-    Player.point[0] += modifier[0]
-    Player.point[1] += modifier[1]
+    Player.point[0] += step[0]
+    Player.point[1] += step[1]
 }
 
-let eventSource: HasEventListeners
-
-export function listen(source?: HasEventListeners): void {
-    if (!source && !eventSource) {
-        throw new Error('You cannot listen to events without providing an event source once.')
-    }
-    if (source) {
-        source.addEventListener('keydown', keyDown)
-        source.addEventListener('keyup', keyUp)
-        eventSource = source
-    }
-    eventSource.addEventListener('keydown', keyDown)
-    eventSource.addEventListener('keyup', keyUp)
-}
-
-export function stopListening() {
-    eventSource.removeEventListener('keydown', keyDown)
-    eventSource.removeEventListener('keyup', keyUp)
+export function listen(source: HasEventListeners): void {
+    source.addEventListener('keydown', keyDown)
+    source.addEventListener('keyup', keyUp)
 }
