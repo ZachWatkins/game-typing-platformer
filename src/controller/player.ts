@@ -4,6 +4,7 @@
  * @author Zachary K. Watkins
  */
 import { Player } from '../model/entities'
+import { rectBeyondStage } from './collision'
 
 type KeyName = 'KeyW' | 'KeyA' | 'KeyS' | 'KeyD'
 type KeyValues = {
@@ -76,6 +77,7 @@ const keyUp = (event: { code: string }): void => {
 
 export function updatePlayer(delta: number): void {
     if (0 === axis.x && 0 === axis.y) return
+    if (rectBeyondStage(Player.rect)) return
     const degrees = axisToDegrees[axis.x + axis.y]
     const step = [
         Player.maxSpeed * delta * Math.cos(degrees * Math.PI / 180),
@@ -83,6 +85,8 @@ export function updatePlayer(delta: number): void {
     ]
     Player.point[0] += step[0]
     Player.point[1] += step[1]
+    Player.rect[0] = Player.point[0]
+    Player.rect[1] = Player.point[1]
 }
 
 export function listen(source: HasEventListeners): void {

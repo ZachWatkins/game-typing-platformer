@@ -13,18 +13,13 @@ declare interface Platform {
     right: number,
 }
 
-declare interface Rect {
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-}
+declare type Rect = [x: number, y: number, width: number, height: number]
 
-declare interface Bounds {
-    top: number,
-    left: number,
-    right: number,
-    bottom: number,
+declare interface Quad {
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
 }
 
 declare interface EntityAppearance {
@@ -37,6 +32,7 @@ declare interface Entity {
     render: boolean,
     interact: boolean,
     collide: boolean,
+    rect: Rect,
     point: Point,
     size: Size,
     maxSpeed: number,

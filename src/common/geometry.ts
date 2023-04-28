@@ -73,9 +73,7 @@ export const nextCoord = (point: [number, number], axis: AxisState, distance: nu
     ]
 }
 
-export const pointIsOutsideRect = (point: Point, rect: Rect): boolean => rect.x > point[0] || rect.y > point[1] || rect.x + rect.width < point[0] || rect.y + rect.height < point[1]
-
-export const pointIsInsideRect = (point: Point, rect: Rect): boolean => rect.x <= point[0] && rect.y <= point[1] && rect.x + rect.width >= point[0] && rect.y + rect.height >= point[1]
+export const pointIsOutsideRect = (point: Point, rect: Rect): boolean => rect[0] > point[0] || rect[1] > point[1] || rect[0] + rect[2] < point[0] || rect[1] + rect[3] < point[1]
 
 export default {
     coordAtDistanceDegrees,

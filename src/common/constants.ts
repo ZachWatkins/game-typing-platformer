@@ -3,7 +3,7 @@ export const STEP = 1 / FPS
 export const MAP = { tw: 64, th: 48 }
 export const TILE = 32
 export const METER = TILE
-export const STAGE_RECT: Rect = { x: 0, y: 0, width: MAP.tw * TILE, height: MAP.th * TILE }
+export const STAGE_RECT: Rect = [0, 0, MAP.tw * TILE, MAP.th * TILE]
 
 /**
  * Default (exagerated) gravity.
