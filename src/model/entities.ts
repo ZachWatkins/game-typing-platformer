@@ -10,6 +10,10 @@ export const Player: Entity = {
     y: 0,
     width: TILE,
     height: TILE,
+    velocity: {
+        x: 0,
+        y: 0,
+    },
     maxSpeed: TILE * 8,
     appearance: {
         backgroundColor: 'red',
@@ -24,7 +28,10 @@ export const Coin: Entity = {
     y: 0,
     width: TILE / 2,
     height: TILE / 2,
-    maxSpeed: 0,
+    velocity: {
+        x: 0,
+        y: 0,
+    },
     appearance: {
         backgroundColor: 'yellow',
     },

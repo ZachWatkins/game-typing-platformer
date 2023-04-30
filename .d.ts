@@ -37,11 +37,15 @@ declare interface Entity {
     interact: boolean,
     falling?: boolean,
     jumping?: boolean,
+    velocity: {
+        x: number,
+        y: number,
+    },
     x: number,
     y: number,
     width: number,
     height: number,
-    maxSpeed: number,
+    maxSpeed?: number,
     appearance: EntityAppearance,
 }
 
