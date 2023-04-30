@@ -3,13 +3,14 @@ import { Player } from '../model/entities'
 let element: HTMLElement
 
 const create = (): HTMLElement => {
-    const [width, height] = Player.size
+    Player.falling = true
+
     element = document.createElement('div')
     element.id = `${Player.type}-${Player.id}`
     element.className = Player.type
     element.style.position = 'absolute'
-    element.style.width = `${width}px`
-    element.style.height = `${height}px`
+    element.style.width = `${Player.width}px`
+    element.style.height = `${Player.height}px`
     element.style.backgroundColor = Player.appearance.backgroundColor
     return element
 }
@@ -22,8 +23,8 @@ export function renderPlayer(): HTMLElement {
     if (!element) {
         element = create()
     }
-    const left = Player.point[0] + 'px'
-    const top = Player.point[1] + 'px'
+    const left = Player.x + 'px'
+    const top = Player.y + 'px'
     if (element.style.left !== left) {
         element.style.left = left
     }

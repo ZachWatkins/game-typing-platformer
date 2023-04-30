@@ -3,7 +3,6 @@
  *
  * @author Zachary K. Watkins
  */
-import { STAGE_RECT } from "../common/constants"
 
 export const quadOverPoint = (a: Quad, point: Point): boolean => {
     return (
@@ -24,8 +23,4 @@ export function rectOverlapsRect(rect1: Rect, rect2: Rect) {
     }
 
     return true;
-}
-
-export function rectBeyondStage(rect: Rect) {
-    return rectOverlapsRect(STAGE_RECT, rect)
 }

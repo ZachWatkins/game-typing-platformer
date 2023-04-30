@@ -1,9 +1,16 @@
 export const FPS = 60
 export const STEP = 1 / FPS
-export const MAP = { tw: 64, th: 48 }
 export const TILE = 32
+export const MAP = { tw: 64, th: 48, width: 64 * TILE, height: 48 * TILE }
 export const METER = TILE
-export const STAGE_RECT: Rect = [0, 0, MAP.tw * TILE, MAP.th * TILE]
+export const SET_MAP_WIDTH = (width: number) => {
+    MAP.tw = width / TILE
+    MAP.width = MAP.tw * TILE
+}
+export const SET_MAP_HEIGHT = (height: number) => {
+    MAP.th = height / TILE
+    MAP.height = MAP.th * TILE
+}
 
 /**
  * Default (exagerated) gravity.

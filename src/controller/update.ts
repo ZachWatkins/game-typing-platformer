@@ -3,7 +3,9 @@
  *
  * @author Zachary K. Watkins
  */
-import { listen, updatePlayer } from './player'
+import { Player } from '../model/entities'
+import { direction, listen } from './input'
+import { MAP } from '../common/constants'
 
 listen(window)
 
@@ -14,5 +16,14 @@ listen(window)
  * @returns {void}
  */
 export default function update(delta: number): void {
-    updatePlayer(delta)
+    if (Player.falling) {
+        let nextY = Player.y + Player.maxSpeed * delta
+        if (nextY + Player.height > MAP.height) {
+            nextY = MAP.height - Player.height
+            Player.falling = false
+        }
+        Player.y = nextY
+    }
+    if (0 === direction.current) return
+    Player.x += Player.maxSpeed * delta * direction.current
 }

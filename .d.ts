@@ -3,6 +3,11 @@
 // Project: [app]
 // Definitions by: [Zachary K. Watkins] <[https://zachwatkins.dev]>
 
+declare interface AppWindow {
+    innerWidth: number,
+    innerHeight: number
+}
+
 declare type Point = [number, number]
 
 declare type Size = [number, number]
@@ -32,21 +37,24 @@ declare interface Entity {
     render: boolean,
     interact: boolean,
     collide: boolean,
-    rect: Rect,
-    point: Point,
-    size: Size,
+    falling?: boolean,
+    jumping?: boolean,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
     maxSpeed: number,
     appearance: EntityAppearance,
 }
 
-declare type AxisState = {
-    x: -1 | 0 | 1,
-    y: -1 | 0 | 1,
-}
-d
 declare type AxisModifier = {
     name: 'x' | 'y',
     value: -1 | 1,
+}
+
+declare type Key = {
+    pressed: boolean,
+    value: -1 | 1
 }
 
 declare type StateObject = { [code: string]: boolean }
