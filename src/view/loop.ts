@@ -12,21 +12,15 @@ let now: number
 let last: number = window.performance.now()
 let dt: number = 0
 
-export function createRenderLoop(): () => void {
-
-    function frame(): void {
-        now = window.performance.now()
-        dt = dt + Math.min(1, (now - last) / 1000);
-        while (dt > STEP) {
-            dt = dt - STEP;
-            update(STEP);
-        }
-        update(dt);
-        render();
-        last = now;
-        requestAnimationFrame(frame)
+export function loop(): void {
+    now = window.performance.now()
+    dt = dt + Math.min(1, (now - last) / 1000);
+    while (dt > STEP) {
+        dt = dt - STEP;
+        update(STEP);
     }
-
-    return frame
-
+    update(dt);
+    render();
+    last = now;
+    requestAnimationFrame(loop)
 }

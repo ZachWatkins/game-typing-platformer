@@ -1,4 +1,5 @@
 import { Player } from '../model/entities'
+import { updateStats } from '../common/stats'
 
 let element: HTMLElement
 
@@ -6,8 +7,7 @@ const create = (): HTMLElement => {
     Player.falling = true
 
     element = document.createElement('div')
-    element.id = `${Player.type}-${Player.id}`
-    element.className = Player.type
+    element.id = `player`
     element.style.position = 'absolute'
     element.style.width = `${Player.width}px`
     element.style.height = `${Player.height}px`
@@ -23,6 +23,7 @@ export function renderPlayer(): HTMLElement {
     if (!element) {
         element = create()
     }
+    updateStats(Player)
     const left = Player.x + 'px'
     const top = Player.y + 'px'
     if (element.style.left !== left) {

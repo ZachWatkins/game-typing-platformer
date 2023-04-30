@@ -4,10 +4,8 @@
  * @author Zachary K. Watkins
  */
 import { Player } from '../model/entities'
-import { direction, listen } from './input'
+import { direction } from './input'
 import { MAP } from '../common/constants'
-
-listen(window)
 
 /**
  * Called on every frame to update values before they are rendered.

@@ -34,9 +34,7 @@ declare interface EntityAppearance {
 declare interface Entity {
     id: number,
     type: string,
-    render: boolean,
     interact: boolean,
-    collide: boolean,
     falling?: boolean,
     jumping?: boolean,
     x: number,

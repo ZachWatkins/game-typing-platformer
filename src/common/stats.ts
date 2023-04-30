@@ -42,11 +42,11 @@ const create = (): HTMLElement => {
 export function updateStats(value: { [key: string]: any }): void {
     for (const key in value) {
         if (value.hasOwnProperty(key)) {
-            const element = value[key]
+            let element = value[key]
             if (typeof element === 'number') {
-                value[key] = element.toFixed(2)
+                element = element.toFixed(2)
             }
-            statsValue[key] = value[key]
+            statsValue[key] = element
         }
     }
 }
