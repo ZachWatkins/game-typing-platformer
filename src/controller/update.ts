@@ -4,7 +4,8 @@
  * @author Zachary K. Watkins
  */
 import { Player } from '../model/entities'
-import { direction } from './input'
+import { falling, jumping, running } from './entity'
+import { controls } from './input'
 import { MAP } from '../common/constants'
 
 /**
@@ -14,14 +15,20 @@ import { MAP } from '../common/constants'
  * @returns {void}
  */
 export default function update(delta: number): void {
+
     if (Player.falling) {
-        let nextY = Player.y + Player.maxSpeed * delta
-        if (nextY + Player.height > MAP.height) {
-            nextY = MAP.height - Player.height
-            Player.falling = false
-        }
-        Player.y = nextY
+        falling.update(Player, delta)
     }
-    if (0 === direction.current) return
-    Player.x += Player.maxSpeed * delta * direction.current
+
+    if (Player.jumping) {
+        jumping.update(Player, delta)
+    }
+
+    if (Player.running) {
+        running.update(Player, delta)
+    }
+
+    Player.velocity.x = Player.speed * controls.direction
+    Player.x += Player.velocity.x * delta
+
 }

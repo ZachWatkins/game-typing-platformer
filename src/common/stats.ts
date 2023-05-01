@@ -21,6 +21,8 @@ const create = (): HTMLElement => {
     stats.style.position = 'absolute'
     stats.style.right = '0'
     stats.style.top = '0'
+    stats.style.bottom = '0'
+    stats.style.overflow = 'auto'
     stats.style.maxWidth = '200px'
     stats.style.minWidth = '120px'
     stats.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'

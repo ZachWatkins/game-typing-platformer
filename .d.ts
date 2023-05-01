@@ -31,12 +31,12 @@ declare interface EntityAppearance {
     backgroundColor: string,
 }
 
-declare interface Entity {
+declare interface Item {
     id: number,
     type: string,
     interact: boolean,
-    falling?: boolean,
-    jumping?: boolean,
+    falling: boolean,
+    speed: number,
     velocity: {
         x: number,
         y: number,
@@ -45,7 +45,25 @@ declare interface Entity {
     y: number,
     width: number,
     height: number,
-    maxSpeed?: number,
+    appearance: EntityAppearance,
+}
+
+declare interface Entity {
+    id: number,
+    type: string,
+    interact: boolean,
+    falling: boolean,
+    jumping: boolean,
+    running: boolean,
+    velocity: {
+        x: number,
+        y: number,
+    },
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    speed: number,
     appearance: EntityAppearance,
 }
 
