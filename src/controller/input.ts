@@ -3,8 +3,6 @@
  *
  * @author Zachary K. Watkins
  */
-import { Player } from '../model/entities'
-import { running, jumping, falling } from './entity'
 const LEFT_KEY = 'KeyA'
 const RIGHT_KEY = 'KeyD'
 const JUMP_KEY = 'Space'
@@ -13,7 +11,7 @@ const pressed: { [key: string]: boolean } = {
     KeyD: false,
     Space: false,
 }
-export const controls = {
+export const controls: Controls = {
     direction: 0,
     jumping: false,
 }
@@ -29,17 +27,14 @@ export function listen(source: HasEventListeners): void {
         if (LEFT_KEY === event.code) {
 
             controls.direction = -1
-            running.start(Player, -1)
 
         } else if (RIGHT_KEY === event.code) {
 
             controls.direction = 1
-            running.start(Player, 1)
 
         } else if (JUMP_KEY === event.code) {
 
             controls.jumping = true
-            jumping.start(Player)
 
         }
 
@@ -56,12 +51,10 @@ export function listen(source: HasEventListeners): void {
             if (pressed[RIGHT_KEY]) {
 
                 controls.direction = 1
-                running.start(Player, 1)
 
             } else {
 
                 controls.direction = 0
-                running.stop(Player)
 
             }
 
@@ -70,19 +63,16 @@ export function listen(source: HasEventListeners): void {
             if (pressed[LEFT_KEY]) {
 
                 controls.direction = -1
-                running.start(Player, -1)
 
             } else {
 
                 controls.direction = 0
-                running.stop(Player)
 
             }
 
         } else if (JUMP_KEY === event.code) {
 
             controls.jumping = false
-            jumping.stop(Player)
 
         }
     })
