@@ -9,12 +9,18 @@ import { controls } from './input'
 
 const applyControls = (entity: Entity): void => {
 
-    if (controls.direction !== 0 && !entity.running) {
-        running.start(entity, controls.direction)
+    if (controls.direction !== 0) {
+        if (controls.direction !== entity.direction) {
+            running.start(entity, controls.direction)
+        }
+    } else {
+        running.stop(entity)
     }
-    if (controls.jumping && !entity.jumping) {
-        jumping.start(entity)
-    } else if (!controls.jumping && entity.jumping) {
+    if (controls.jumping) {
+        if (!entity.jumping && !entity.falling) {
+            jumping.start(entity)
+        }
+    } else if (entity.jumping) {
         jumping.stop(entity)
     }
 
