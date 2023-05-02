@@ -55,6 +55,7 @@ declare interface Entity {
     falling: boolean,
     jumping: boolean,
     running: boolean,
+    direction: -1 | 0 | 1,
     velocity: {
         x: number,
         y: number,
@@ -79,12 +80,9 @@ declare type Key = {
 
 declare type StateObject = { [code: string]: boolean }
 
-declare type Controller = {
-    up: boolean,
-    down: boolean,
-    left: boolean,
-    right: boolean,
-    jump: boolean,
+declare type Controls = {
+    direction: -1 | 0 | 1,
+    jumping: boolean,
 }
 
 declare interface RenderContext {

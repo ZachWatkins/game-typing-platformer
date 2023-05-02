@@ -1,4 +1,5 @@
 import { Player } from '../model/entities'
+import { falling } from '../controller/entity'
 import { updateStats } from '../common/stats'
 
 let element: HTMLElement
@@ -22,6 +23,7 @@ const create = (): HTMLElement => {
 export function renderPlayer(): HTMLElement {
     if (!element) {
         element = create()
+        falling.start(Player)
     }
     updateStats(Player)
     const left = Player.x + 'px'

@@ -7,6 +7,7 @@ export const Player: Entity = {
     falling: false,
     jumping: false,
     running: false,
+    direction: 0,
     x: 0,
     y: 0,
     width: TILE,
@@ -18,24 +19,5 @@ export const Player: Entity = {
     speed: TILE * 8,
     appearance: {
         backgroundColor: 'red',
-    },
-}
-
-export const Coin: Item = {
-    id: 1,
-    type: 'coin',
-    interact: true,
-    falling: false,
-    speed: TILE * 8,
-    x: 0,
-    y: 0,
-    width: TILE / 2,
-    height: TILE / 2,
-    velocity: {
-        x: 0,
-        y: 0,
-    },
-    appearance: {
-        backgroundColor: 'yellow',
     },
 }

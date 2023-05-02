@@ -24,18 +24,16 @@ export function listen(source: HasEventListeners): void {
 
         pressed[event.code] = true
 
-        if (LEFT_KEY === event.code) {
-
-            controls.direction = -1
-
-        } else if (RIGHT_KEY === event.code) {
-
-            controls.direction = 1
-
-        } else if (JUMP_KEY === event.code) {
-
-            controls.jumping = true
-
+        switch (event.code) {
+            case LEFT_KEY:
+                controls.direction = -1
+                break
+            case RIGHT_KEY:
+                controls.direction = 1
+                break
+            case JUMP_KEY:
+                controls.jumping = true
+                break
         }
 
     })
@@ -46,34 +44,16 @@ export function listen(source: HasEventListeners): void {
 
         pressed[event.code] = false
 
-        if (LEFT_KEY === event.code) {
-
-            if (pressed[RIGHT_KEY]) {
-
-                controls.direction = 1
-
-            } else {
-
-                controls.direction = 0
-
-            }
-
-        } else if (RIGHT_KEY === event.code) {
-
-            if (pressed[LEFT_KEY]) {
-
-                controls.direction = -1
-
-            } else {
-
-                controls.direction = 0
-
-            }
-
-        } else if (JUMP_KEY === event.code) {
-
-            controls.jumping = false
-
+        switch (event.code) {
+            case LEFT_KEY:
+                controls.direction = pressed[RIGHT_KEY] ? 1 : 0
+                break
+            case RIGHT_KEY:
+                controls.direction = pressed[LEFT_KEY] ? -1 : 0
+                break
+            case JUMP_KEY:
+                controls.jumping = false
+                break
         }
     })
 

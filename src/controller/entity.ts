@@ -8,10 +8,12 @@ import { MAP } from '../common/constants'
 export const running = {
     start: (entity: Entity, direction: -1 | 1): void => {
         entity.running = true
+        entity.direction = direction
         entity.velocity.x = entity.speed * direction
     },
     stop: (entity: Entity): void => {
         entity.running = false
+        entity.direction = 0
         entity.velocity.x = 0
     },
     update: (entity: Entity, delta: number): void => {
@@ -54,8 +56,8 @@ export const jumping = {
     },
     stop: (entity: Entity): void => {
         entity.jumping = false
-        entity.falling = true
-        entity.velocity.y = entity.speed
+        entity.velocity.y = 0
+        falling.start(entity)
     },
     update: (entity: Entity, delta: number): void => {
         let nextY = entity.y + entity.velocity.y * delta
@@ -67,4 +69,18 @@ export const jumping = {
 
         entity.y = nextY
     },
+}
+
+export const updateEntity = (entity: Entity, delta: number): void => {
+    if (entity.running) {
+        running.update(entity, delta)
+    }
+
+    if (entity.jumping) {
+        jumping.update(entity, delta)
+    }
+
+    if (entity.falling) {
+        falling.update(entity, delta)
+    }
 }
