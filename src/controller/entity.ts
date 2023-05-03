@@ -53,6 +53,8 @@ export const jumping = {
     start: (entity: Entity): void => {
         entity.jumping = true
         entity.velocity.y -= entity.speed
+        entity.platform.y = entity.y
+        entity.platform.jumpY = entity.y - entity.jump
     },
     stop: (entity: Entity): void => {
         entity.jumping = false
@@ -62,8 +64,8 @@ export const jumping = {
     update: (entity: Entity, delta: number): void => {
         let nextY = entity.y + entity.velocity.y * delta
 
-        if (nextY < 0) {
-            nextY = 0
+        if (nextY < entity.platform.jumpY) {
+            nextY = entity.platform.jumpY + (entity.platform.jumpY - nextY)
             jumping.stop(entity)
         }
 

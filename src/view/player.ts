@@ -1,4 +1,4 @@
-import { Player } from '../model/entities'
+import { Player } from '../model/entity'
 import { falling } from '../controller/entity'
 import { updateStats } from '../common/stats'
 

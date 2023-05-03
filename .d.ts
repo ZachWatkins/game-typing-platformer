@@ -65,6 +65,11 @@ declare interface Entity {
     width: number,
     height: number,
     speed: number,
+    jump: number,
+    platform: {
+        y: number,
+        jumpY: number,
+    },
     appearance: EntityAppearance,
 }
 
