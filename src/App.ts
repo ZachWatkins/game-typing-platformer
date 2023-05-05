@@ -3,25 +3,11 @@
  *
  * @author Zachary K. Watkins
  */
-import { MAP } from './common/constants'
 import { loop } from './view/loop'
 import { listen } from './controller/input'
-import { renderPlayer } from './view/player'
+import { playerElement } from './view/render'
 import { SET_MAP_WIDTH, SET_MAP_HEIGHT } from './common/constants'
-
-/**
- * Create the app container element.
- *
- * @returns {Node}
- */
-const create = (): Node => {
-    const element = document.createElement('div')
-    element.id = 'app'
-    element.style.width = MAP.width + 'px'
-    element.style.height = MAP.height + 'px'
-    element.style.position = 'relative'
-    return element
-}
+import view from './view'
 
 /**
  * The game's application container component.
@@ -37,17 +23,21 @@ export default function App(properties: { width: number, height: number }): Node
     SET_MAP_HEIGHT(properties.height)
 
     // Create the app container.
-    const element = create()
+    const root = view.context.createRoot({
+        id: 'app',
+        width: properties.width,
+        height: properties.height,
+    })
 
     // Listen for input events.
     listen(window)
 
     // Add game elements to the app container.
-    element.appendChild(renderPlayer())
+    view.context.append(root, playerElement)
 
     // Instantiate the game render loop.
     loop()
 
     // Return the app container.
-    return element
+    return root
 }

@@ -99,3 +99,32 @@ declare interface HasEventListeners {
     addEventListener: (type: string, listener: (event: { code: string }) => void) => void,
     removeEventListener: (type: string, listener: (event: { code: string }) => void) => void,
 }
+
+declare interface ViewAttributes {
+    id: number | string,
+    width: number,
+    height: number,
+    x?: number,
+    y?: number,
+}
+
+declare interface ViewInterface {
+    createRoot: (props: ViewAttributes) => object,
+    create: (props: ViewAttributes) => object,
+    append: (root: object, element: object) => void,
+    position: (element: object, point: { x: number, y: number }) => void,
+}
+
+declare interface HTMLViewAttributes extends ViewAttributes {
+    position?: 'absolute' | 'relative',
+    appearance?: {
+        backgroundColor?: string,
+    },
+}
+
+declare interface HTMLViewInterface extends ViewInterface {
+    createRoot: (props: HTMLViewAttributes) => HTMLElement,
+    create: (props: HTMLViewAttributes) => HTMLElement,
+    append: (root: HTMLElement, element: HTMLElement) => void,
+    position: (element: HTMLElement, point: { x: number, y: number }) => void,
+}
