@@ -1,5 +1,11 @@
+/**
+ * DOM interaction module.
+ *
+ * @author Zachary K. Watkins
+ */
+
 export const create = (props: HTMLViewAttributes): HTMLElement => {
-    const element = document.createElement('div')
+    const element = document.createElement(props.tagName || 'div')
     element.id = String(props.id)
     element.style.position = props.position || 'relative'
     if (props.x && props.y) {
