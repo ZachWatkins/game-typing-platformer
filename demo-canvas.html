@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+</head>
+<body>
+    <canvas id="app" width="300" height="300"></canvas>
+    <script>
+        const TILE = 30;
+        const props = {
+            id: 'player',
+            type: 'player',
+            interact: true,
+            falling: false,
+            jumping: false,
+            running: false,
+            direction: 0,
+            x: 0,
+            y: 0,
+            width: TILE,
+            height: TILE,
+            velocity: {
+                x: 0,
+                y: 0,
+            },
+            speed: TILE * 8,
+            jump: TILE * 4,
+            platform: {
+                y: 0,
+                jumpY: 0,
+            },
+            appearance: {
+                backgroundColor: 'red',
+            },
+        };
+        console.log(`M${props.x || 0} ${props.y || 0} h ${props.width} v ${props.height} h -${props.width} Z`);
+        const path = new Path2D(`M${props.x || 0} ${props.y || 0} h ${props.width} v ${props.height} h -${props.width} Z`);
+        console.log(path);
+        const canvas = document.getElementById('app');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = props.appearance.backgroundColor;
+        ctx.fill(path);
+
+        let p = new Path2D("M10 10 h 80 v 80 h -80 Z");
+        ctx.fill(p);
+    </script>
+</body>
+</html>
