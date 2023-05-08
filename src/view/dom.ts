@@ -3,8 +3,18 @@
  *
  * @author Zachary K. Watkins
  */
-
-export const create = (props: HTMLViewAttributes): HTMLElement => {
+export const create = (props: {
+    id: number | string,
+    width: number,
+    height: number,
+    position?: string,
+    x?: number,
+    y?: number,
+    tagName?: string,
+    appearance?: {
+        backgroundColor?: string,
+    },
+}): HTMLElement => {
     const element = document.createElement(props.tagName || 'div')
     element.id = String(props.id)
     element.style.position = props.position || 'relative'
@@ -35,7 +45,7 @@ export const position = (element: HTMLElement, point: { x: number, y: number }):
     }
 }
 
-export default <HTMLViewInterface>{
+export default {
     createRoot: create,
     create,
     append,

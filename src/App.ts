@@ -5,7 +5,7 @@
  */
 import { loop } from './view/loop'
 import { listen } from './controller/input'
-import { playerElement } from './view/render'
+import { Player } from './model/entity'
 import { SET_MAP_WIDTH, SET_MAP_HEIGHT } from './common/constants'
 import view from './view'
 
@@ -26,14 +26,14 @@ export default function App(properties: { width: number, height: number }): Node
     const root = view.context.createRoot({
         id: 'app',
         width: properties.width,
-        height: properties.height,
+        height: properties.height
     })
 
     // Listen for input events.
     listen(window)
 
     // Add game elements to the app container.
-    view.context.append(root, playerElement)
+    view.context.paint(Player)
 
     // Instantiate the game render loop.
     loop()

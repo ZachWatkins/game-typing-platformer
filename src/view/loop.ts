@@ -15,7 +15,6 @@ let dt: number = 0
 export function loop(): void {
     now = window.performance.now()
     dt = dt + Math.min(1, (now - last) / 1000);
-    console.log(dt, now - last)
     while (dt > STEP) {
         dt = dt - STEP;
         update(STEP);

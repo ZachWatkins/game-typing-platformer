@@ -2,7 +2,7 @@ import { TILE } from '../common/constants'
 import { MAP } from '../common/constants'
 
 export const Player: Entity = {
-    id: 1,
+    id: 'player',
     type: 'player',
     interact: true,
     falling: false,
@@ -10,7 +10,7 @@ export const Player: Entity = {
     running: false,
     direction: 0,
     x: 0,
-    y: MAP.height - TILE,
+    y: 0,
     width: TILE,
     height: TILE,
     velocity: {
@@ -26,4 +26,31 @@ export const Player: Entity = {
     appearance: {
         backgroundColor: 'red',
     },
+}
+
+export type Entity = {
+    id: string,
+    type: string,
+    interact: boolean,
+    falling: boolean,
+    jumping: boolean,
+    running: boolean,
+    direction: -1 | 0 | 1,
+    velocity: {
+        x: number,
+        y: number,
+    },
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    speed: number,
+    jump: number,
+    platform: {
+        y: number,
+        jumpY: number,
+    },
+    appearance: {
+        backgroundColor: string,
+    }
 }

@@ -4,6 +4,7 @@
  * @author Zachary K. Watkins
  */
 import { MAP } from '../common/constants'
+import { Entity } from '../model/entity'
 
 export const running = {
     start: (entity: Entity, direction: -1 | 1): void => {

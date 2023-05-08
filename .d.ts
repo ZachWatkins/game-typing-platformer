@@ -27,10 +27,6 @@ declare interface Quad {
     y2: number,
 }
 
-declare interface EntityAppearance {
-    backgroundColor: string,
-}
-
 declare interface Item {
     id: number,
     type: string,
@@ -45,31 +41,6 @@ declare interface Item {
     y: number,
     width: number,
     height: number,
-    appearance: EntityAppearance,
-}
-
-declare interface Entity {
-    id: number,
-    type: string,
-    interact: boolean,
-    falling: boolean,
-    jumping: boolean,
-    running: boolean,
-    direction: -1 | 0 | 1,
-    velocity: {
-        x: number,
-        y: number,
-    },
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    speed: number,
-    jump: number,
-    platform: {
-        y: number,
-        jumpY: number,
-    },
     appearance: EntityAppearance,
 }
 
@@ -100,36 +71,9 @@ declare interface HasEventListeners {
     removeEventListener: (type: string, listener: (event: { code: string }) => void) => void,
 }
 
-declare interface ViewAttributes {
-    id: number | string,
-    width: number,
-    height: number,
-    x: number,
-    y: number,
-    tagName?: string,
-    appearance?: {
-        backgroundColor?: string,
-    },
-}
-
 declare interface ViewInterface {
     createRoot: (props: ViewAttributes) => object,
     create: (props: ViewAttributes) => object,
     append: (root: object, element: object) => void,
     position: (element: object, point: { x: number, y: number }) => void,
-}
-
-declare interface HTMLViewAttributes extends ViewAttributes {
-    position?: 'absolute' | 'relative',
-}
-
-declare interface HTMLViewInterface extends ViewInterface {
-    createRoot: (props: HTMLViewAttributes) => HTMLElement,
-    create: (props: HTMLViewAttributes) => HTMLElement,
-    append: (root: HTMLElement, element: HTMLElement) => void,
-    position: (element: HTMLElement, point: { x: number, y: number }) => void,
-}
-
-declare interface CanvasViewAttributes extends ViewAttributes {
-    pathRef?: Path2D,
 }
