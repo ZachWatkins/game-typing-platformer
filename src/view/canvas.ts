@@ -12,7 +12,7 @@ export const createRoot = (props: { id: string, width: number, height: number })
     root.id = props.id
     root.width = props.width
     root.height = props.height
-    context = root.getContext('2d') as CanvasRenderingContext2D
+    context = root.getContext('2d', { alpha: false }) as CanvasRenderingContext2D
     return root
 }
 

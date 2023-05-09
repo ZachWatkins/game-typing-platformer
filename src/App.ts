@@ -30,7 +30,7 @@ export default function App(properties: { width: number, height: number }): Node
     })
 
     // Listen for input events.
-    listen(window)
+    listen()
 
     // Add game elements to the app container.
     view.context.paint(Player)

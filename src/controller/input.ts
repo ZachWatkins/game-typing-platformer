@@ -16,11 +16,13 @@ export const controls: Controls = {
     jumping: false,
 }
 
-export function listen(source: HasEventListeners): void {
+export function listen(): void {
 
-    source.addEventListener('keydown', (event: { code: string }): void => {
+    document.addEventListener('keydown', (event: KeyboardEvent): false => {
 
-        if (pressed[event.code] !== false) return
+        event.preventDefault()
+
+        if (pressed[event.code] !== false) return false
 
         pressed[event.code] = true
 
@@ -36,11 +38,15 @@ export function listen(source: HasEventListeners): void {
                 break
         }
 
+        return false
+
     })
 
-    source.addEventListener('keyup', (event: { code: string }): void => {
+    document.addEventListener('keyup', (event: KeyboardEvent): false => {
 
-        if (pressed[event.code] !== true) return
+        event.preventDefault()
+
+        if (pressed[event.code] !== true) return false
 
         pressed[event.code] = false
 
@@ -55,6 +61,8 @@ export function listen(source: HasEventListeners): void {
                 controls.jumping = false
                 break
         }
+
+        return false
     })
 
 }
