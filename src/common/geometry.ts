@@ -34,14 +34,14 @@ export const coordAtDistanceDegrees = (distance: number, degree: number): [numbe
     ]
 }
 
-export const axisToDegrees = (axis: AxisState): number => {
+export const axisToDegrees = (axis: { x: number, y: number }): number => {
     const axisKey = axis.x + ',' + axis.y
     return axisDegreeMap[axisKey]
 }
 
 export const precise = (value: number, precision: number): number => parseFloat(value.toPrecision(precision))
 
-export const nextCoordModifier = (axis: AxisState, distance: number): [number, number] => {
+export const nextCoordModifier = (axis: { x: number, y: number }, distance: number): [number, number] => {
     const axisKey = axis.x + ',' + axis.y
     const degrees = axisDegreeMap[axisKey]
     if (degrees === -1) {
@@ -56,7 +56,7 @@ export const nextCoordModifier = (axis: AxisState, distance: number): [number, n
     ]
 }
 
-export const nextCoord = (point: [number, number], axis: AxisState, distance: number): [number, number] => {
+export const nextCoord = (point: [number, number], axis: { x: number, y: number }, distance: number): [number, number] => {
     const axisKey = axis.x + ',' + axis.y
     const degrees = axisDegreeMapCartesian[axisKey]
     if (degrees === -1) {
