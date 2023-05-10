@@ -3,7 +3,7 @@
  *
  * @author Zachary K. Watkins
  */
-import { Player } from '../model/entity'
+import { Player, Entity } from '../model/entity'
 import { updateEntity, jumping, running } from './entity'
 import { controls } from './input'
 
