@@ -13,7 +13,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "outDir": "build"
+    "outDir": "built"
   },
   "include": ["src", "./*.d.ts"]
 }
