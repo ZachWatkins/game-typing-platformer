@@ -1,5 +1,4 @@
 import { TILE } from '../common/constants'
-import { MAP } from '../common/constants'
 
 export const Player: Entity = {
     id: 'player',
