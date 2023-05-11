@@ -23,13 +23,12 @@ function frame(): void {
     now = performance.now();
     elapsed = now - then;
 
-    update(elapsed);
-
     if (elapsed > fpsInterval) {
         // Get ready for next frame by setting then=now, but also adjust for your
         // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
         then = now - (elapsed % fpsInterval);
 
+        update(elapsed);
         render();
     }
 }
