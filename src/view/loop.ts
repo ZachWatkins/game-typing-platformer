@@ -13,14 +13,14 @@ let elapsed: number
 
 export function loop(fps: number) {
     fpsInterval = 1000 / fps;
-    then = Date.now();
+    then = performance.now();
     frame();
 }
 
 function frame(): void {
     requestAnimationFrame(frame);
 
-    now = Date.now();
+    now = performance.now();
     elapsed = now - then;
 
     update(elapsed);
