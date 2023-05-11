@@ -3,26 +3,35 @@
  *
  * @author Zachary K. Watkins
  */
-import { STEP } from '../common/constants'
 import update from '../controller/update'
 import render from './render'
 
-// Rendering context.
+let fpsInterval: number
 let now: number
-let last: number = window.performance.now()
-let dt: number = 0
+let then: number
+let elapsed: number
 
-export function loop(): void {
-    now = window.performance.now()
-    dt = dt + Math.min(1, (now - last) / 1000);
-    while (dt > STEP) {
-        dt = dt - STEP;
-        update(STEP);
+export function loop(fps: number) {
+    fpsInterval = 1000 / fps;
+    then = Date.now();
+    frame();
+}
+
+function frame(): void {
+    requestAnimationFrame(frame);
+
+    now = Date.now();
+    elapsed = now - then;
+
+    update(elapsed);
+
+    if (elapsed > fpsInterval) {
+        // Get ready for next frame by setting then=now, but also adjust for your
+        // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
+        then = now - (elapsed % fpsInterval);
+
+        render();
     }
-    update(dt);
-    render();
-    last = now;
-    requestAnimationFrame(loop)
 }
 
 export default loop
