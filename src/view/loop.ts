@@ -28,7 +28,7 @@ function frame(): void {
         // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
         then = now - (elapsed % fpsInterval);
 
-        update(elapsed);
+        update(elapsed / 1000);
         render();
     }
 }
