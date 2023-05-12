@@ -6,6 +6,7 @@
 import { Player, Entity } from '../model/entity'
 import { updateEntity, jumping, running } from './entity'
 import { controls } from './input'
+import { renderStats, updateStats } from '../common/stats'
 
 const applyControls = (entity: Entity): void => {
 
@@ -37,5 +38,6 @@ export default function update(delta: number): void {
     applyControls(Player)
 
     updateEntity(Player, delta)
-
+    updateStats(Player)
+    renderStats()
 }

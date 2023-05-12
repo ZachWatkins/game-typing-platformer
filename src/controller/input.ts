@@ -3,13 +3,17 @@
  *
  * @author Zachary K. Watkins
  */
-const LEFT_KEY = 'KeyA'
-const RIGHT_KEY = 'KeyD'
+const LEFT_KEY = 'ArrowLeft'
+const RIGHT_KEY = 'ArrowRight'
 const JUMP_KEY = 'Space'
 const pressed: { [key: string]: boolean } = {
-    KeyA: false,
-    KeyD: false,
-    Space: false,
+    [LEFT_KEY]: false,
+    [RIGHT_KEY]: false,
+    [JUMP_KEY]: false,
+}
+const options: AddEventListenerOptions = {
+    capture: true,
+    passive: false
 }
 export const controls: Controls = {
     direction: 0,
@@ -17,52 +21,28 @@ export const controls: Controls = {
 }
 
 export function listen(): void {
+    document.body.addEventListener('keydown', handleKeyDown, options)
+    document.body.addEventListener('keyup', handleKeyUp, options)
+}
 
-    document.addEventListener('keydown', (event: KeyboardEvent): false => {
-
-        event.preventDefault()
-
-        if (pressed[event.code] !== false) return false
-
+function handleKeyDown(event: KeyboardEvent): void {
+    if (pressed[event.code] === false) {
         pressed[event.code] = true
-
         switch (event.code) {
-            case LEFT_KEY:
-                controls.direction = -1
-                break
-            case RIGHT_KEY:
-                controls.direction = 1
-                break
-            case JUMP_KEY:
-                controls.jumping = true
-                break
+            case LEFT_KEY: controls.direction = -1; return
+            case RIGHT_KEY: controls.direction = 1; return
+            case JUMP_KEY: controls.jumping = true; return
         }
+    }
+}
 
-        return false
-
-    })
-
-    document.addEventListener('keyup', (event: KeyboardEvent): false => {
-
-        event.preventDefault()
-
-        if (pressed[event.code] !== true) return false
-
+function handleKeyUp(event: KeyboardEvent): void {
+    if (pressed[event.code] === true) {
         pressed[event.code] = false
-
         switch (event.code) {
-            case LEFT_KEY:
-                controls.direction = pressed[RIGHT_KEY] ? 1 : 0
-                break
-            case RIGHT_KEY:
-                controls.direction = pressed[LEFT_KEY] ? -1 : 0
-                break
-            case JUMP_KEY:
-                controls.jumping = false
-                break
+            case LEFT_KEY: controls.direction = pressed[RIGHT_KEY] ? 1 : 0; return
+            case RIGHT_KEY: controls.direction = pressed[LEFT_KEY] ? -1 : 0; return
+            case JUMP_KEY: controls.jumping = false; return
         }
-
-        return false
-    })
-
+    }
 }

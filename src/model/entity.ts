@@ -16,8 +16,9 @@ export const Player: Entity = {
         x: 0,
         y: 0,
     },
-    speed: TILE * 8,
-    jump: TILE * 4,
+    speed: TILE * 10,
+    jumpLimit: TILE * 4,
+    jumpSpeed: 1,
     platform: {
         y: 0,
         jumpY: 0,
@@ -44,7 +45,8 @@ export type Entity = {
     width: number,
     height: number,
     speed: number,
-    jump: number,
+    jumpLimit: number,
+    jumpSpeed: number,
     platform: {
         y: number,
         jumpY: number,

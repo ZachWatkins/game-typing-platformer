@@ -6,7 +6,18 @@
 import { MAP } from '../common/constants'
 import type { Entity } from '../model/entity'
 
-export const running = {
+function easeOutCubic(TimeElapsed: number, StartValue: number, EndValueDifference: number, Duration: number) {
+    return EndValueDifference * ((TimeElapsed = TimeElapsed / Duration - 1) * TimeElapsed * TimeElapsed + 1) + StartValue;
+}
+
+function easeInOutCubic(TimeElapsed: number, StartValue: number, EndValueDifference: number, Duration: number) {
+    if ((TimeElapsed /= Duration / 2) < 1) return EndValueDifference / 2 * TimeElapsed * TimeElapsed * TimeElapsed + StartValue;
+    return EndValueDifference / 2 * ((TimeElapsed -= 2) * TimeElapsed * TimeElapsed + 2) + StartValue;
+}
+
+
+export const running: RunningEntityController = {
+    queue: {},
     start: (entity: Entity, direction: -1 | 1): void => {
         entity.running = true
         entity.direction = direction
@@ -29,7 +40,8 @@ export const running = {
     },
 }
 
-export const falling = {
+export const falling: EntityController = {
+    queue: {},
     start: (entity: Entity): void => {
         entity.falling = true
         entity.velocity.y = entity.speed
@@ -50,12 +62,19 @@ export const falling = {
     },
 }
 
-export const jumping = {
+export const jumping: EntityController = {
+    queue: {},
     start: (entity: Entity): void => {
+        jumping.queue[entity.id] = {
+            TimeElapsed: 0,
+            StartValue: entity.y,
+            EndValueDifference: entity.jumpLimit,
+            Duration: entity.speed
+        }
         entity.jumping = true
         entity.velocity.y -= entity.speed
         entity.platform.y = entity.y
-        entity.platform.jumpY = entity.y - entity.jump
+        entity.platform.jumpY = entity.y - entity.jumpLimit
     },
     stop: (entity: Entity): void => {
         entity.jumping = false
@@ -64,12 +83,10 @@ export const jumping = {
     },
     update: (entity: Entity, delta: number): void => {
         let nextY = entity.y + entity.velocity.y * delta
-
         if (nextY < entity.platform.jumpY) {
             nextY = entity.platform.jumpY + (entity.platform.jumpY - nextY)
             jumping.stop(entity)
         }
-
         entity.y = nextY
     },
 }
@@ -86,4 +103,29 @@ export const updateEntity = (entity: Entity, delta: number): void => {
     if (entity.falling) {
         falling.update(entity, delta)
     }
+}
+
+declare type Animation = {
+    TimeElapsed: number,
+    StartValue: number,
+    EndValueDifference: number,
+    Duration: number
+}
+
+declare type EntityController = {
+    queue: {
+        [key: string]: Animation
+    },
+    start: (entity: Entity, ...args: number[]) => void,
+    stop: (entity: Entity) => void,
+    update: (entity: Entity, delta: number) => void
+}
+
+declare type RunningEntityController = {
+    queue: {
+        [key: string]: Animation
+    },
+    start: (entity: Entity, arg: -1 | 1) => void,
+    stop: (entity: Entity) => void,
+    update: (entity: Entity, delta: number) => void
 }
