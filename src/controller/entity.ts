@@ -55,7 +55,7 @@ export const jumping = {
         entity.jumping = true
         entity.velocity.y -= entity.speed
         entity.platform.y = entity.y
-        entity.platform.jumpY = entity.y - entity.jump
+        entity.platform.jumpY = entity.y - entity.jumpLimit
     },
     stop: (entity: Entity): void => {
         entity.jumping = false
