@@ -6,16 +6,6 @@
 import { MAP } from '../common/constants'
 import type { Entity } from '../model/entity'
 
-function easeOutCubic(TimeElapsed: number, StartValue: number, EndValueDifference: number, Duration: number) {
-    return EndValueDifference * ((TimeElapsed = TimeElapsed / Duration - 1) * TimeElapsed * TimeElapsed + 1) + StartValue;
-}
-
-function easeInOutCubic(TimeElapsed: number, StartValue: number, EndValueDifference: number, Duration: number) {
-    if ((TimeElapsed /= Duration / 2) < 1) return EndValueDifference / 2 * TimeElapsed * TimeElapsed * TimeElapsed + StartValue;
-    return EndValueDifference / 2 * ((TimeElapsed -= 2) * TimeElapsed * TimeElapsed + 2) + StartValue;
-}
-
-
 export const running: RunningEntityController = {
     queue: {},
     start: (entity: Entity, direction: -1 | 1): void => {
