@@ -3,17 +3,26 @@
  *
  * @author Zachary K. Watkins
  */
-const LEFT_KEY = 'KeyA'
-const RIGHT_KEY = 'KeyD'
+const LEFT_KEY = 'ArrowLeft'
+const RIGHT_KEY = 'ArrowRight'
 const JUMP_KEY = 'Space'
 const pressed: { [key: string]: boolean } = {
-    KeyA: false,
-    KeyD: false,
-    Space: false,
+    [LEFT_KEY]: false,
+    [RIGHT_KEY]: false,
+    [JUMP_KEY]: false,
 }
 const options: AddEventListenerOptions = {
     capture: true,
     passive: false
+}
+export const controls: Controls = {
+    direction: 0,
+    jumping: false,
+}
+
+export function listen(): void {
+    document.body.addEventListener('keydown', handleKeyDown, options)
+    document.body.addEventListener('keyup', handleKeyUp, options)
 }
 
 function handleKeyDown(event: KeyboardEvent): void {
@@ -36,14 +45,4 @@ function handleKeyUp(event: KeyboardEvent): void {
             case JUMP_KEY: controls.jumping = false; return
         }
     }
-}
-
-export const controls: Controls = {
-    direction: 0,
-    jumping: false,
-}
-
-export function listen(): void {
-    document.addEventListener('keydown', handleKeyDown, options)
-    document.addEventListener('keyup', handleKeyUp, options)
 }
