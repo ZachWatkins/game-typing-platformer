@@ -1,4 +1,41 @@
-import { updateStats } from '../common/stats'
+/**
+ * Geometry utility functions.
+ *
+ * @module common/geometry
+ * @author Zachary K. Watkins
+ */
+
+/**
+ * Constrain a value to a range.
+ *
+ * @param {number} x The value to constrain.
+ * @param {number} min The minimum value.
+ * @param {number} max The maximum value.
+ * @returns {number} The constrained value.
+ */
+export function bound(x: number, min: number, max: number): number {
+    return Math.max(min, Math.min(max, x))
+}
+
+/**
+ * Determine if two rectangles overlap.
+ *
+ * @param {number} x1 The x coordinate of the first rectangle.
+ * @param {number} y1 The y coordinate of the first rectangle.
+ * @param {number} w1 The width of the first rectangle.
+ * @param {number} h1 The height of the first rectangle.
+ * @param {number} x2 The x coordinate of the second rectangle.
+ * @param {number} y2 The y coordinate of the second rectangle.
+ * @param {number} w2 The width of the second rectangle.
+ * @param {number} h2 The height of the second rectangle.
+ * @returns {boolean} True if the rectangles overlap, false otherwise.
+ */
+export function overlap(x1: number, y1: number, w1: number, h1: number, x2: number, y2: number, w2: number, h2: number) {
+    return !(((x1 + w1 - 1) < x2) ||
+        ((x2 + w2 - 1) < x1) ||
+        ((y1 + h1 - 1) < y2) ||
+        ((y2 + h2 - 1) < y1))
+}
 
 const axisDegreeMap: { [key: string]: -1 | 0 | 45 | 90 | 135 | 180 | 225 | 270 | 315 } = {
     '0,0': -1,
@@ -64,8 +101,6 @@ export const nextCoord = (point: [number, number], axis: { x: number, y: number 
     }
 
     const modifier = coordAtDistanceDegrees(distance, degrees)
-    console.log(modifier)
-    updateStats({ degrees, point, modifier })
 
     return [
         point[0] + modifier[0],
@@ -74,11 +109,3 @@ export const nextCoord = (point: [number, number], axis: { x: number, y: number 
 }
 
 export const pointIsOutsideRect = (point: Point, rect: Rect): boolean => rect[0] > point[0] || rect[1] > point[1] || rect[0] + rect[2] < point[0] || rect[1] + rect[3] < point[1]
-
-export default {
-    coordAtDistanceDegrees,
-    axisToDegrees,
-    nextCoordModifier,
-    nextCoord,
-    pointIsOutsideRect
-}
