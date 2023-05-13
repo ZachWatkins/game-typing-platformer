@@ -4,7 +4,6 @@
  * @author Zachary K. Watkins
  * @module stats.js
  */
-import { controls } from '../controller/input'
 
 let stats: HTMLElement
 
@@ -81,7 +80,6 @@ function fpsMeter(): void {
             frames = 0
 
             statsValue.fps = fps
-            statsValue.controls = controls
         }
 
         requestAnimationFrame(loop)
