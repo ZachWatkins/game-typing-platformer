@@ -22,25 +22,19 @@ export const controls: { [key: string]: boolean } = {
     jump: false,
 }
 
+function handleKey(event: KeyboardEvent): void {
+    if (pressed[event.code] === (event.type != "keydown")) {
+        controls[keyMap[event.code]] = pressed[event.code] = event.type == "keydown"
+    }
+}
+
 export function listen(): void {
-    document.body.addEventListener('keydown', handleKeyDown, {
+    document.body.addEventListener('keydown', handleKey, {
         capture: true,
         passive: false
     })
-    document.body.addEventListener('keyup', handleKeyUp, {
+    document.body.addEventListener('keyup', handleKey, {
         capture: true,
         passive: false
     })
-}
-
-function handleKeyDown(event: KeyboardEvent): void {
-    if (pressed[event.code] === false) {
-        controls[keyMap[event.code]] = pressed[event.code] = true
-    }
-}
-
-function handleKeyUp(event: KeyboardEvent): void {
-    if (pressed[event.code] === true) {
-        controls[keyMap[event.code]] = pressed[event.code] = false
-    }
 }
