@@ -40,8 +40,8 @@ function handleKeyUp(event: KeyboardEvent): void {
     if (pressed[event.code] === true) {
         pressed[event.code] = false
         switch (event.code) {
-            case LEFT_KEY: controls.direction = pressed[RIGHT_KEY] ? 1 : 0; return
-            case RIGHT_KEY: controls.direction = pressed[LEFT_KEY] ? -1 : 0; return
+            case LEFT_KEY: controls.direction = 0; return
+            case RIGHT_KEY: controls.direction = 0; return
             case JUMP_KEY: controls.jumping = false; return
         }
     }
