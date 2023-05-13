@@ -6,10 +6,13 @@
 import { TILE } from '../common/constants'
 
 export const platforms: Platform[] = [{
-    x: 0,
+    x: 100,
     y: window.innerHeight - TILE,
     width: window.innerWidth,
     height: TILE,
+    appearance: {
+        backgroundColor: '#FFFF00',
+    }
 }];
 
 type Platform = {
@@ -17,4 +20,7 @@ type Platform = {
     y: number
     width: number
     height: number
+    appearance: {
+        backgroundColor: string
+    }
 }

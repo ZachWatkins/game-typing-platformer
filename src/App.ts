@@ -6,7 +6,9 @@
 import { loop } from './view/loop'
 import { listen } from './controller/input'
 import { Player } from './model/entity'
+import { platforms } from './model/environment'
 import { SET_MAP_WIDTH, SET_MAP_HEIGHT, FPS } from './common/constants'
+import { render } from './view/canvas'
 import view from './view'
 
 /**
@@ -34,6 +36,9 @@ export default function App(properties: { width: number, height: number }): Node
 
     // Add game elements to the app container.
     view.context.paint(Player)
+    for (let i = 0; i < platforms.length; i++) {
+        view.context.paint(platforms[i])
+    }
 
     // Instantiate the game render loop.
     loop(FPS)
