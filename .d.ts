@@ -12,12 +12,6 @@ declare type Point = [number, number]
 
 declare type Size = [number, number]
 
-declare interface Platform {
-    top: number,
-    left: number,
-    right: number,
-}
-
 declare type Rect = [x: number, y: number, width: number, height: number]
 
 declare interface Quad {

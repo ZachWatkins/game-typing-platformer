@@ -3,29 +3,10 @@
  *
  * @author Zachary K. Watkins
  */
-import { Player, Entity } from '../model/entity'
+import { Player } from '../model/entity'
 import { updateEntity, jumping, running } from './entity'
 import { controls } from './input'
 import { renderStats, updateStats } from '../common/stats'
-
-const applyControls = (entity: Entity): void => {
-
-    if (controls.direction !== 0) {
-        if (controls.direction !== entity.direction) {
-            running.start(entity, controls.direction)
-        }
-    } else {
-        running.stop(entity)
-    }
-    if (controls.jumping) {
-        if (!entity.jumping && !entity.falling) {
-            jumping.start(entity)
-        }
-    } else if (entity.jumping) {
-        jumping.stop(entity)
-    }
-
-}
 
 /**
  * Called on every frame to update values before they are rendered.
@@ -35,7 +16,24 @@ const applyControls = (entity: Entity): void => {
  */
 export default function update(delta: number): void {
 
-    applyControls(Player)
+    if (controls.left) {
+        if (Player.direction >= 0) {
+            running.start(Player, -1)
+        }
+    } else if (controls.right) {
+        if (Player.direction <= 0) {
+            running.start(Player, 1)
+        }
+    } else {
+        running.stop(Player)
+    }
+    if (controls.jump) {
+        if (!Player.jumping && !Player.falling) {
+            jumping.start(Player)
+        }
+    } else if (Player.jumping) {
+        jumping.stop(Player)
+    }
 
     updateEntity(Player, delta)
     updateStats(Player)

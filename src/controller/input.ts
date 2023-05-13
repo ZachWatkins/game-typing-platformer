@@ -11,38 +11,36 @@ const pressed: { [key: string]: boolean } = {
     [RIGHT_KEY]: false,
     [JUMP_KEY]: false,
 }
-const options: AddEventListenerOptions = {
-    capture: true,
-    passive: false
+const keyMap: { [key: string]: string } = {
+    [LEFT_KEY]: 'left',
+    [RIGHT_KEY]: 'right',
+    [JUMP_KEY]: 'jump',
 }
-export const controls: Controls = {
-    direction: 0,
-    jumping: false,
+export const controls: { [key: string]: boolean } = {
+    left: false,
+    right: false,
+    jump: false,
 }
 
 export function listen(): void {
-    document.body.addEventListener('keydown', handleKeyDown, options)
-    document.body.addEventListener('keyup', handleKeyUp, options)
+    document.body.addEventListener('keydown', handleKeyDown, {
+        capture: true,
+        passive: false
+    })
+    document.body.addEventListener('keyup', handleKeyUp, {
+        capture: true,
+        passive: false
+    })
 }
 
 function handleKeyDown(event: KeyboardEvent): void {
     if (pressed[event.code] === false) {
-        pressed[event.code] = true
-        switch (event.code) {
-            case LEFT_KEY: controls.direction = -1; return
-            case RIGHT_KEY: controls.direction = 1; return
-            case JUMP_KEY: controls.jumping = true; return
-        }
+        controls[keyMap[event.code]] = pressed[event.code] = true
     }
 }
 
 function handleKeyUp(event: KeyboardEvent): void {
     if (pressed[event.code] === true) {
-        pressed[event.code] = false
-        switch (event.code) {
-            case LEFT_KEY: controls.direction = 0; return
-            case RIGHT_KEY: controls.direction = 0; return
-            case JUMP_KEY: controls.jumping = false; return
-        }
+        controls[keyMap[event.code]] = pressed[event.code] = false
     }
 }
