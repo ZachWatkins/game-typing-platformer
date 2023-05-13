@@ -5,11 +5,11 @@ export const MAP = { tw: 64, th: 48, width: 64 * TILE, height: 48 * TILE }
 export const METER = TILE
 export const SET_MAP_WIDTH = (width: number) => {
     MAP.tw = width / TILE
-    MAP.width = MAP.tw * TILE
+    MAP.width = width
 }
 export const SET_MAP_HEIGHT = (height: number) => {
     MAP.th = height / TILE
-    MAP.height = MAP.th * TILE
+    MAP.height = height
 }
 
 /**
