@@ -97,7 +97,5 @@ export default {
     COLOR,
     COLORS,
     KEY,
-    bound,
     get,
-    overlap,
 }
