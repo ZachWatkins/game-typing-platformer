@@ -5,6 +5,8 @@
  */
 import { MAP } from '../common/constants'
 import type { Entity } from '../model/entity'
+import { platforms } from '../model/environment'
+import { rectOverlapsRect } from './physics'
 
 export const running: RunningEntityController = {
     queue: {},
@@ -42,8 +44,22 @@ export const falling: EntityController = {
     },
     update: (entity: Entity, delta: number): void => {
         let nextY = entity.y + entity.velocity.y * delta
-
-        if (nextY + entity.height > MAP.height) {
+        let stopFalling = nextY + entity.height > MAP.height ? true : false
+        if (!stopFalling) {
+            // More checks for platform detection.
+            let playerRect: Rect = [entity.x, entity.y, entity.width, entity.height]
+            for (let i = 0; i < platforms.length; i++) {
+                let platform = platforms[i]
+                // console.log(platform)
+                let platformRect: Rect = [platform.x, platform.y, platform.width, platform.height]
+                console.log(window.innerHeight, playerRect, platformRect)
+                if (rectOverlapsRect(playerRect, platformRect)) {
+                    stopFalling = true
+                    break
+                }
+            }
+        }
+        if (stopFalling) {
             nextY = MAP.height - entity.height
             falling.stop(entity)
         }
