@@ -8,7 +8,6 @@ import { listen } from './controller/input'
 import { Player } from './model/entity'
 import { platforms } from './model/environment'
 import { SET_MAP_WIDTH, SET_MAP_HEIGHT, FPS } from './common/constants'
-import { render } from './view/canvas'
 import view from './view'
 
 /**
