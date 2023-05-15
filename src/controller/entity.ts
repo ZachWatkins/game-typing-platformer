@@ -50,9 +50,7 @@ export const falling: EntityController = {
             let playerRect: Rect = [entity.x, entity.y, entity.width, entity.height]
             for (let i = 0; i < platforms.length; i++) {
                 let platform = platforms[i]
-                // console.log(platform)
                 let platformRect: Rect = [platform.x, platform.y, platform.width, platform.height]
-                console.log(window.innerHeight, playerRect, platformRect)
                 if (rectOverlapsRect(playerRect, platformRect)) {
                     stopFalling = true
                     break

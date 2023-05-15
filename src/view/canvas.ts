@@ -6,6 +6,7 @@
 
 let root: HTMLCanvasElement
 let context: CanvasRenderingContext2D
+const images: { [key: string]: HTMLImageElement } = {}
 
 export const createRoot = (props: { id: string, width: number, height: number }): HTMLCanvasElement => {
     root = document.createElement('canvas')
@@ -21,10 +22,19 @@ export const clear = (): void => {
 }
 
 export const paint = (props: PathProps): void => {
-    let saveFill: string | CanvasGradient | CanvasPattern = context.fillStyle || ''
-    context.fillStyle = props.appearance.backgroundColor
-    context.fillRect(props.x, props.y, props.width, props.height)
-    context.fillStyle = saveFill
+    if (props.appearance.image) {
+        if (!images[props.appearance.image.id]) {
+            // Create a new image element to load the image.
+            images[props.appearance.image.id] = new Image()
+            images[props.appearance.image.id].src = props.appearance.image.src
+        }
+        context.drawImage(images[props.appearance.image.id], props.x, props.y)
+    } else {
+        let saveFill: string | CanvasGradient | CanvasPattern = context.fillStyle || ''
+        context.fillStyle = props.appearance.backgroundColor
+        context.fillRect(props.x, props.y, props.width, props.height)
+        context.fillStyle = saveFill
+    }
 }
 
 export default {
@@ -39,6 +49,10 @@ type PathProps = {
     width: number,
     height: number,
     appearance: {
-        backgroundColor: string
+        backgroundColor: string,
+        image?: {
+            id: string,
+            src: string,
+        },
     }
 }

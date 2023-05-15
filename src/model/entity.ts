@@ -25,6 +25,10 @@ export const Player: Entity = {
     },
     appearance: {
         backgroundColor: 'red',
+        image: {
+            id: 'player',
+            src: 'assets/player-scaled.png',
+        },
     },
 }
 
@@ -53,5 +57,9 @@ export type Entity = {
     },
     appearance: {
         backgroundColor: string,
-    }
+        image?: {
+            id: string,
+            src: string,
+        },
+    },
 }
