@@ -28,7 +28,9 @@ export const paint = (props: PathProps): void => {
             images[props.appearance.image.id] = new Image()
             images[props.appearance.image.id].src = props.appearance.image.src
         }
-        context.drawImage(images[props.appearance.image.id], props.x, props.y)
+        context.fillStyle = props.appearance.backgroundColor
+        context.fillRect(props.x, props.y, props.width, props.height)
+        context.drawImage(images[props.appearance.image.id], props.x, props.y, props.width, props.height)
     } else {
         let saveFill: string | CanvasGradient | CanvasPattern = context.fillStyle || ''
         context.fillStyle = props.appearance.backgroundColor

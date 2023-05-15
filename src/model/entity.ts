@@ -10,8 +10,8 @@ export const Player: Entity = {
     direction: 0,
     x: 0,
     y: 0,
-    width: TILE,
-    height: TILE,
+    width: TILE * 3,
+    height: TILE * 3,
     velocity: {
         x: 0,
         y: 0,
@@ -27,7 +27,7 @@ export const Player: Entity = {
         backgroundColor: 'red',
         image: {
             id: 'player',
-            src: 'assets/player-scaled.png',
+            src: 'assets/player.png',
         },
     },
 }
