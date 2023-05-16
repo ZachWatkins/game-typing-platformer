@@ -18,7 +18,6 @@ module.exports = defineConfig({
         'public/',
         'includes/',
     ],
-    plugins: ['jsdoc'],
     parserOptions: {
         sourceType: 'module',
         ecmaVersion: 2018,

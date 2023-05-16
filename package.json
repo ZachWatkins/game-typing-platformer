@@ -20,7 +20,6 @@
         "preview": "vite preview",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "doc": "jsdoc -d guides src/*.js",
         "tsc": "tsc"
     },
     "dependencies": {
