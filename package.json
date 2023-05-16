@@ -19,7 +19,7 @@
         "build": "tsc && vite build --base=./",
         "preview": "vite preview",
         "prelint": "tsc",
-        "lint": "",
+        "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "tsc": "tsc",
         "prepare": "husky install"
