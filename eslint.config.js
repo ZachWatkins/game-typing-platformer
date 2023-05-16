@@ -16,7 +16,6 @@ const ignores = ['node_modules/', 'dist/', 'build/', 'public/', 'includes/']
 const MyConfig = {
     files: ['**/*.js', '*.js'],
     ignores,
-    plugins: {},
     languageOptions: {
         parserOptions: {
             sourceType: 'module',
@@ -44,6 +43,9 @@ const MyJsonConfig = {
     files: ['**/*.json', '*.json'],
     ignores,
     plugins: { jsonc },
+    languageOptions: {
+        parser: jsonc,
+    },
     rules: jsonc.configs['recommended-with-jsonc'].rules,
 }
 
