@@ -36,7 +36,7 @@
         "eslint-plugin-promise": "^6.0.0",
         "husky": "^8.0.3",
         "typescript": "^5.0.4",
-        "vite": "^4.2.1",
+        "vite": "^4.2.3",
         "vite-plugin-node-polyfills": "^0.8.1"
     },
     "types": "index.d.ts"
